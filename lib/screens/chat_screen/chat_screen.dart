@@ -56,6 +56,7 @@ class Chat_Screen extends StatelessWidget {
                       hintStyle: const TextStyle(color: Colors.grey),
                       suffixIcon: const Icon(
                         Icons.send,
+
                         color: Colors.white,
                       ),
                       focusedBorder: OutlineInputBorder(
