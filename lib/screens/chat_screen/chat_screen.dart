@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:university/constants.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
@@ -15,8 +17,8 @@ class Chat_Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<QuerySnapshot>(
-      future: messages.get(),
+    return StreamBuilder<QuerySnapshot>(
+      stream: messages.orderBy('createdAt').snapshots(),
       builder: (context,snapshot) {
         if (snapshot.hasData) {
           List<Message> messagesList = [];
@@ -56,6 +58,8 @@ class Chat_Screen extends StatelessWidget {
                         messages.add(
                           {
                             'message': data,
+                         'createdAt':DateTime.now()
+,
                           },
                         );
                         controller.clear();
