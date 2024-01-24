@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:university/componenets/button_home.dart';
 import 'package:university/constants.dart';
+import 'package:university/models/chat_model.dart';
 import 'package:university/screens/chat_screen/chat_screen.dart';
 import 'package:university/screens/my_profile/my_profile.dart';
 
@@ -16,14 +17,8 @@ class HomeScreen extends StatelessWidget {
         children: [
           //we will divide the screen into two parts
           Container(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
-            height: MediaQuery
-                .of(context)
-                .size
-                .height / 2.5,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 2.5,
             padding: const EdgeInsets.all(kDefaultPadding),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                         maxRadius: 50.0,
                         backgroundColor: kSecondaryColor,
                         backgroundImage:
-                        AssetImage('assets/images/student_profile.jpeg'),
+                            AssetImage('assets/images/student_profile.jpeg'),
                       ),
                     ),
                     const SizedBox(
@@ -57,23 +52,21 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Text(
                               "Hi",
-                              style: Theme
-                                  .of(context)
+                              style: Theme.of(context)
                                   .textTheme
                                   .subtitle1!
                                   .copyWith(
-                                fontWeight: FontWeight.w200,
-                              ),
+                                    fontWeight: FontWeight.w200,
+                                  ),
                             ),
                             Text(
                               "Sally",
-                              style: Theme
-                                  .of(context)
+                              style: Theme.of(context)
                                   .textTheme
                                   .subtitle1!
                                   .copyWith(
-                                fontWeight: FontWeight.w700,
-                              ),
+                                    fontWeight: FontWeight.w700,
+                                  ),
                             ),
                           ],
                         ),
@@ -83,13 +76,9 @@ class HomeScreen extends StatelessWidget {
                         Text(
                           'Class X-II A | Roll no:12',
                           style:
-                          Theme
-                              .of(context)
-                              .textTheme
-                              .subtitle2!
-                              .copyWith(
-                            fontSize: 14.0,
-                          ),
+                              Theme.of(context).textTheme.subtitle2!.copyWith(
+                                    fontSize: 14.0,
+                                  ),
                         ),
                         const SizedBox(
                           height: kDefaultPadding / 2,
@@ -100,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: kOtherColor,
                             borderRadius:
-                            BorderRadius.circular(kDefaultPadding),
+                                BorderRadius.circular(kDefaultPadding),
                           ),
                           child: const Center(
                             child: Text(
@@ -127,14 +116,8 @@ class HomeScreen extends StatelessWidget {
                         //go to attendance screen  here
                       },
                       child: Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 2.5,
-                        height: MediaQuery
-                            .of(context)
-                            .size
-                            .height / 9,
+                        width: MediaQuery.of(context).size.width / 2.5,
+                        height: MediaQuery.of(context).size.height / 9,
                         decoration: BoxDecoration(
                           color: kOtherColor,
                           borderRadius: BorderRadius.circular(kDefaultPadding),
@@ -144,25 +127,23 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Attendance',
-                              style: Theme
-                                  .of(context)
+                              style: Theme.of(context)
                                   .textTheme
                                   .bodyText2!
                                   .copyWith(
-                                  fontSize: 16,
-                                  color: kTextBlackColor,
-                                  fontWeight: FontWeight.w800),
+                                      fontSize: 16,
+                                      color: kTextBlackColor,
+                                      fontWeight: FontWeight.w800),
                             ),
                             Text(
                               '95.09%',
-                              style: Theme
-                                  .of(context)
+                              style: Theme.of(context)
                                   .textTheme
                                   .subtitle2!
                                   .copyWith(
-                                  fontSize: 25,
-                                  color: kTextBlackColor,
-                                  fontWeight: FontWeight.w300),
+                                      fontSize: 25,
+                                      color: kTextBlackColor,
+                                      fontWeight: FontWeight.w300),
                             ),
                           ],
                         ),
@@ -173,14 +154,8 @@ class HomeScreen extends StatelessWidget {
                         //go to attendance screen  here
                       },
                       child: Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width / 2.5,
-                        height: MediaQuery
-                            .of(context)
-                            .size
-                            .height / 9,
+                        width: MediaQuery.of(context).size.width / 2.5,
+                        height: MediaQuery.of(context).size.height / 9,
                         decoration: BoxDecoration(
                           color: kOtherColor,
                           borderRadius: BorderRadius.circular(kDefaultPadding),
@@ -190,25 +165,23 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Cost ',
-                              style: Theme
-                                  .of(context)
+                              style: Theme.of(context)
                                   .textTheme
                                   .bodyText2!
                                   .copyWith(
-                                  fontSize: 16,
-                                  color: kTextBlackColor,
-                                  fontWeight: FontWeight.w800),
+                                      fontSize: 16,
+                                      color: kTextBlackColor,
+                                      fontWeight: FontWeight.w800),
                             ),
                             Text(
                               '6000\Pound',
-                              style: Theme
-                                  .of(context)
+                              style: Theme.of(context)
                                   .textTheme
                                   .subtitle2!
                                   .copyWith(
-                                  fontSize: 25,
-                                  color: kTextBlackColor,
-                                  fontWeight: FontWeight.w300),
+                                      fontSize: 25,
+                                      color: kTextBlackColor,
+                                      fontWeight: FontWeight.w300),
                             ),
                           ],
                         ),
@@ -221,81 +194,18 @@ class HomeScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              color: Colors.transparent,
-              child: Container(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
-                decoration: const BoxDecoration(
-                  color: kOtherColor,
-                  borderRadius: BorderRadius.only(),
-                ),
-                child: Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          InkWell(
-                            onTap: () {},
-                            child: const ButtonHome(
-                              title: 'Take Quiz',
-                              icon: Icons.quiz,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: const ButtonHome(
-                              title: 'Discussion From',
-                              icon: Icons.holiday_village,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: const ButtonHome(
-                              title: 'Result',
-                              icon: Icons.ac_unit,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          InkWell(
-                            onTap: () {},
-                            child: const ButtonHome(
-                              title: 'Assigments',
-                              icon: Icons.assignment_add,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(context,MaterialPageRoute(builder: (_)
-                              {
-                                return  Chat_Screen();
-                              }),
-                              );
-                            },
-                            child: const ButtonHome(
-                              title: 'Chat',
-                              icon: Icons.format_align_justify_rounded,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: const ButtonHome(
-                              title: 'Courses',
-                              icon: Icons.data_array,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+              padding: const EdgeInsets.all(12),
+              color: Colors.white,
+              child: GridView.builder(
+
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+
+                ),itemCount: listButtonHome.length,
+                itemBuilder: (context, index) =>
+                    ButtonHome(ButtonHomeModel: listButtonHome[index]),
               ),
             ),
           ),

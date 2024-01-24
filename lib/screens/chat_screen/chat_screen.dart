@@ -17,31 +17,30 @@ class Chat_Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: messages.orderBy('createdAt', descending: true).snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<Message> messagesList = [];
-          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-            messagesList.add(Message.fromJson(snapshot.data!.docs[i]));
-          }
-
-          return Scaffold(
-              appBar: AppBar(
-                automaticallyImplyLeading: false,
-                backgroundColor: kPrimaryColor,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/scholar.png',
-                      height: 50,
-                    ),
-                    const Text('Chat'),
-                  ],
-                ),
+    return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: kPrimaryColor,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/scholar.png',
+                height: 50,
               ),
-              body: Column(
+              const Text('Chat'),
+            ],
+          ),
+        ),
+        body: StreamBuilder<QuerySnapshot>(
+          stream: messages.orderBy('createdAt', descending: true).snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<Message> messagesList = [];
+              for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                messagesList.add(Message.fromJson(snapshot.data!.docs[i]));
+              }
+              return Column(
                 children: [
                   Expanded(
                     child: ListView.builder(
@@ -76,9 +75,25 @@ class Chat_Screen extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: 'Sent Message',
                         hintStyle: const TextStyle(color: Colors.grey),
-                        suffixIcon: const Icon(
-                          Icons.send,
-                          color: Colors.white,
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            messages.add(
+                              {
+                                'message': controller.text,
+                                'createdAt': DateTime.now(),
+                              },
+                            );
+                            controller.clear();
+                            _controller.animateTo(
+                              0,
+                              curve: Curves.fastOutSlowIn,
+                              duration: const Duration(milliseconds: 500),
+                            );
+                          },
+                          child: const Icon(
+                            Icons.send,
+                            color: Colors.white,
+                          ),
                         ),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
@@ -91,12 +106,12 @@ class Chat_Screen extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-              backgroundColor: kContainerColor);
-        } else {
-          return const Text('loading..');
-        }
-      },
-    );
+              );
+            } else {
+              return const Center(child: Text('loading..'));
+            }
+          },
+        ),
+        backgroundColor: kContainerColor);
   }
 }
