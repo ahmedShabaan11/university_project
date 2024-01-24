@@ -70,7 +70,7 @@ class Chat_Screen extends StatelessWidget {
                         _controller.animateTo(
                           0,
                           curve: Curves.fastOutSlowIn,
-                          duration: const Duration(seconds: 1),
+                          duration: const Duration(milliseconds: 500),
                         );
                       },
                       decoration: InputDecoration(
