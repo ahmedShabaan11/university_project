@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:university/componenets/custom_button.dart';
 import 'package:university/constants.dart';
@@ -15,19 +16,28 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   //changes current state
   final _formKey = GlobalKey<FormState>();
-final emailController =TextEditingController();
-final passwordController =TextEditingController();
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.toString().trim(),
+        password: _passwordController.toString().trim());
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _passwordVisible = true;
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
-    emailController.dispose();
-    passwordController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
   }
 
   @override
@@ -39,7 +49,6 @@ final passwordController =TextEditingController();
       },
       child: Scaffold(
         body: ListView(
-
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width,
@@ -104,16 +113,8 @@ final passwordController =TextEditingController();
                         buildPasswordField(),
                         sizedBox,
                         DefaultButton(
-                          onPress: () {
-
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamed(
-                                  context,
-                                  HomeScreen.id,
-                                  );
-                            }
-                          },
-                          title: 'SIGN IN',
+                          onPress: signIn,
+                          title: " SIGN IN",
                           iconData: Icons.arrow_forward_outlined,
                         ),
                         sizedBox,
@@ -122,8 +123,9 @@ final passwordController =TextEditingController();
                           child: Text(
                             'SIGN UP',
                             textAlign: TextAlign.end,
-                            style: TextStyle(fontWeight: FontWeight.bold,
-                              color:Colors.black87,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
                               fontSize: 20,
                             ),
                           ),
@@ -142,9 +144,9 @@ final passwordController =TextEditingController();
 
   TextFormField buildTEmailField() {
     return TextFormField(
-      controller: emailController,
+      controller: _emailController,
       textAlign: TextAlign.start,
-      keyboardType: TextInputType.emailAddress,
+
       style: const TextStyle(
         color: kTextBlackColor,
         fontSize: 17,
@@ -157,7 +159,7 @@ final passwordController =TextEditingController();
       ),
       //for validation
       validator: (value) {
-        RegExp regExp = new RegExp(emailPattern);
+        RegExp regExp = new RegExp(_emailController.text.trim());
         if (value == null || value.isEmpty) {
           return 'please Enter some Text ';
         } else if (!regExp.hasMatch(value)) {
@@ -169,9 +171,9 @@ final passwordController =TextEditingController();
 
   TextFormField buildPasswordField() {
     return TextFormField(
-      controller: passwordController,
+      controller: _passwordController,
       obscureText: _passwordVisible,
-      keyboardType: TextInputType.visiblePassword,
+
       style: const TextStyle(
         color: kTextBlackColor,
         fontSize: 17,
