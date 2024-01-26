@@ -7,16 +7,16 @@ import '../../componenets/chat_bubble_model.dart';
 import '../../models/messages.dart';
 
 class Chat_Screen extends StatelessWidget {
-  Chat_Screen({super.key});
+  Chat_Screen({super.key,});
 
   final ScrollController _controller = ScrollController();
-
   TextEditingController controller = TextEditingController();
   CollectionReference messages =
       FirebaseFirestore.instance.collection('messages');
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -81,6 +81,7 @@ class Chat_Screen extends StatelessWidget {
                               {
                                 'message': controller.text,
                                 'createdAt': DateTime.now(),
+
                               },
                             );
                             controller.clear();

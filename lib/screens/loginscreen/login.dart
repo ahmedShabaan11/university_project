@@ -15,12 +15,19 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   //changes current state
   final _formKey = GlobalKey<FormState>();
-
+final emailController =TextEditingController();
+final passwordController =TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _passwordVisible = true;
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    emailController.dispose();
+    passwordController.dispose();
   }
 
   @override
@@ -98,11 +105,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         sizedBox,
                         DefaultButton(
                           onPress: () {
+
                             if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamedAndRemoveUntil(
+                              Navigator.pushNamed(
                                   context,
-                                  HomeScreen.routeName,
-                                  (route) => false);
+                                  HomeScreen.id,
+                                  );
                             }
                           },
                           title: 'SIGN IN',
@@ -112,11 +120,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         const Align(
                           alignment: Alignment.bottomRight,
                           child: Text(
-                            'Forgot Password',
+                            'SIGN UP',
                             textAlign: TextAlign.end,
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontSize: 15,
+                            style: TextStyle(fontWeight: FontWeight.bold,
+                              color:Colors.black87,
+                              fontSize: 20,
                             ),
                           ),
                         )
@@ -134,6 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextFormField buildTEmailField() {
     return TextFormField(
+      controller: emailController,
       textAlign: TextAlign.start,
       keyboardType: TextInputType.emailAddress,
       style: const TextStyle(
@@ -160,6 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextFormField buildPasswordField() {
     return TextFormField(
+      controller: passwordController,
       obscureText: _passwordVisible,
       keyboardType: TextInputType.visiblePassword,
       style: const TextStyle(

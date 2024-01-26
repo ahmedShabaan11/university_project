@@ -71,7 +71,7 @@ class Caht_Bubble_re extends StatelessWidget {
             color: Colors.amber),
         child:  Text(
           message.message,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );

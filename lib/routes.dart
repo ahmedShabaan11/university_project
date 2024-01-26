@@ -9,6 +9,6 @@ Map<String, WidgetBuilder> routes = {
 //all screens will be registred  here like mainfest in android
   SplashScreen.routeName: (context) => const SplashScreen(),
   LoginScreen.routeName: (context) => LoginScreen(),
-  HomeScreen.routeName: (context) => const HomeScreen(),
+  HomeScreen.id: (context) =>  HomeScreen(),
   MyProfileScreens.routeName: (context) => const MyProfileScreens(),
 };
