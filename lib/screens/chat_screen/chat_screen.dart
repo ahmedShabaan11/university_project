@@ -14,7 +14,8 @@ class Chat_Screen extends StatelessWidget {
   CollectionReference messages =
       FirebaseFirestore.instance.collection('messages');
 
-  @override
+
+     @override
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -62,6 +63,7 @@ class Chat_Screen extends StatelessWidget {
                         messages.add(
                           {
                             'message': data,
+
                             'createdAt': DateTime.now(),
                           },
                         );

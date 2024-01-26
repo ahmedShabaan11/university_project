@@ -3,63 +3,44 @@ import 'package:flutter/material.dart';
 import 'package:university/componenets/custom_button.dart';
 import 'package:university/componenets/custom_text_formfeild.dart';
 import 'package:university/constants.dart';
-import 'package:university/screens/home_screen/home_screen.dart';
-import 'package:university/screens/signup_screen/sign_up.dart';
-
-late bool _passwordVisible;
-
-class LoginScreen extends StatefulWidget {
-  static String routeName = 'LoginScreen';
+import 'package:university/screens/loginscreen/login.dart';
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  //changes current state
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
-  signIn(BuildContext context) async {
-    try {
-      if (_formKey.currentState!.validate()) {
-        final credential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-            email: _emailController.text.trim(),
-            password: _passwordController.text.trim())
-            .then((value) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeScreen()));
-        });
-      }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
-    }
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _passwordVisible = true;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    // TODO: implement dispose
-    _emailController.dispose();
-    _passwordController.dispose();
-  }
-
+  final _name = TextEditingController();
   bool visibilityPassword = true;
 
+  signUp(BuildContext context)async{
+    try {
+      if(_formKey.currentState!.validate()){
+        final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        FirebaseAuth.instance.currentUser?.updateDisplayName(_name.text.trim()).then((value){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+        });
+      }
+
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -146,7 +127,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: kDefaultPadding,
                         ),
                         CustomTextFormFeild(
+                          controller: _name,
+                          hintText: 'Mobile Number /Email',
 
+                        ),CustomTextFormFeild(
                           controller: _emailController,
                           hintText: 'Mobile Number /Email',
 
@@ -171,10 +155,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         sizedBox,
                         DefaultButton(
                           onPress: () async {
-                            await signIn(context);
+                            await signUp(context);
 
                           },
-                          title: " SIGN IN",
+                          title: " SIGN UP",
                           iconData: Icons.arrow_forward_outlined,
                         ),
                         sizedBox,
@@ -185,12 +169,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const SignUp(),
+                                  builder: (context) => LoginScreen(),
                                 ),
                               );
                             },
                             child: const Text(
-                              'SIGN UP',
+                              'SIGN IN',
                               textAlign: TextAlign.end,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -211,5 +195,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 }

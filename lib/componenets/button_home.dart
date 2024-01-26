@@ -4,14 +4,14 @@ import 'package:university/models/chat_model.dart';
 import 'package:university/models/chat_model.dart';
 
 class ButtonHome extends StatelessWidget {
-   ButtonHome({super.key, required this.ButtonHomeModel});
+   ButtonHome({super.key, required this.buttonHomeModel});
 
- buttonHomeModel ButtonHomeModel;
+ ButtonHomeModel buttonHomeModel;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => ButtonHomeModel.onTap(context),
+      onTap: () => buttonHomeModel.onTap(context),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.lightGreen,
@@ -23,11 +23,11 @@ class ButtonHome extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Icon(
-              ButtonHomeModel.icon,
+              buttonHomeModel.icon,
               color: kTextWhiteColor,
             ),
             Text(
-              ButtonHomeModel.title,
+              buttonHomeModel.title,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,

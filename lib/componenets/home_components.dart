@@ -195,7 +195,7 @@ class homeComponents extends StatelessWidget {
               ),
               itemCount: listButtonHome.length,
               itemBuilder: (context, index) =>
-                  ButtonHome(ButtonHomeModel: listButtonHome[index]),
+                  ButtonHome(buttonHomeModel: listButtonHome[index]),
             ),
           ),
         ),

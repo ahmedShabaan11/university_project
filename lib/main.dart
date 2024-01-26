@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:university/auth.dart';
+
 import 'package:university/constants.dart';
 import 'package:university/routes.dart';
 import 'package:university/screens/splash_screens/splash_screens.dart';
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
 debugShowCheckedModeBanner: false ,
-      home:  const Auth(),
+
       title: "My University",
 //we will use light theme for  our app
       theme: ThemeData.light().copyWith(
