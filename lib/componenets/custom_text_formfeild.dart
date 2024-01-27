@@ -4,6 +4,7 @@ import '../constants.dart';
 
 class CustomTextFormFeild extends StatelessWidget {
   String hintText;
+  String ?labelText;
   IconData? icon;
   bool obscureText;
   void Function()? onTap;
@@ -15,6 +16,7 @@ class CustomTextFormFeild extends StatelessWidget {
     required this.hintText,
     this.icon,
     this.onTap,
+    this.labelText,
     this.controller,
     this.keyboardType,
     this.obscureText = false,
@@ -23,19 +25,24 @@ class CustomTextFormFeild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       validator: (value) {
         RegExp regExp = RegExp(controller!.text);
         if (value == null || value.isEmpty) {
           return 'please Enter correct input';
-        } else if (regExp.hasMatch(value)) {
+        } else if (!regExp.hasMatch(value)) {
           return 'Please Enter a valid input ';
         }
       },
       style: const TextStyle(color: Colors.black, fontSize: 20),
       controller: controller,
       obscureText: obscureText,
-
+textInputAction: TextInputAction.go,
       decoration: InputDecoration(
+        filled: false,
+        fillColor: Colors.white,
+        labelText:labelText,
+
         isDense: true,
         hintText: hintText,
         suffixIcon: icon == null
@@ -45,14 +52,14 @@ class CustomTextFormFeild extends StatelessWidget {
                 onTap: onTap,
               ),
 
+        suffixStyle: const TextStyle(decoration: TextDecoration.lineThrough),
         border: OutlineInputBorder(
+
+
           borderRadius: BorderRadius.circular(25),
         ),
       ),
     );
   }
 
-  bool checkRegex(String value, String regex) {
-    return RegExp(regex).hasMatch(value);
-  }
 }

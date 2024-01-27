@@ -146,7 +146,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: kDefaultPadding,
                         ),
                         CustomTextFormFeild(
-
+labelText: "Email",
+                          keyboardType: TextInputType.emailAddress,
                           controller: _emailController,
                           hintText: 'Mobile Number /Email',
 
@@ -158,6 +159,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: visibilityPassword ? Icons
                               .visibility_outlined : Icons
                               .visibility_off_outlined,
+                          labelText: "Password",
+                          keyboardType: TextInputType.number,
                           controller: _passwordController,
                           hintText: 'Password',
                           obscureText: visibilityPassword,
