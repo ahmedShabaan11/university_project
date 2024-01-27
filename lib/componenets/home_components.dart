@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:university/data/models/chat_model.dart';
 
 import '../constants.dart';
-import '../models/chat_model.dart';
 import '../screens/my_profile/my_profile.dart';
 import 'button_home.dart';
 

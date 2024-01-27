@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:university/models/messages.dart';
+import 'package:university/data/models/messages.dart';
 
 import '../constants.dart';
 
@@ -33,7 +33,7 @@ class Caht_Bubble extends StatelessWidget {
               color: kPrimaryColor),
           child:  Text(
             message.message,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white,fontWeight: FontWeight.w400),
           ),
         ),
       ],
@@ -53,7 +53,7 @@ class Caht_Bubble_re extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.centerRight,
       child: Container(
         padding: const EdgeInsets.only(
           left: 16,
@@ -66,12 +66,12 @@ class Caht_Bubble_re extends StatelessWidget {
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(32),
               topRight: Radius.circular(32),
-              bottomRight: Radius.circular(32),
+          bottomLeft: Radius.circular(32)
             ),
-            color: Colors.amber),
+            color: Colors.white),
         child:  Text(
           message.message,
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400),
         ),
       ),
     );

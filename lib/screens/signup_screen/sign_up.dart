@@ -50,10 +50,11 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        body: ListView(children:[
-           Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        body: ListView(children: [
+          Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Center(
-              child: Container(width: double.infinity,
+              child: Container(
+                width: double.infinity,
                 height: 350,
                 child: Image.asset(
                   'assets/images/portrait-young-female-jumping-holding-books_23-2148883676.jpg',
@@ -67,32 +68,28 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(
                     height: kDefaultPadding,
                   ),
-                  CustomTextFormFeild(
+                  CustomTextFormField(
                     keyboardType: TextInputType.text,
                     controller: _name,
-                 labelText: "Name",
-                    hintText: "Name",
+                    text: "Name",
                   ),
-                  CustomTextFormFeild(
-                    controller: _emailController,
-labelText: "Email",
+                  CustomTextFormField(
                     keyboardType: TextInputType.emailAddress,
-                    hintText: 'Mobile Number /Email',
+                    controller: _emailController,
+                    text: 'Mobile Number /Email',
                   ),
                   const SizedBox(
                     height: kDefaultPadding,
                   ),
-                  CustomTextFormFeild(
-                    icon: visibilityPassword
+                  CustomTextFormField(
+                    iconData: visibilityPassword
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
+                    keyboardType: TextInputType.text,
                     controller: _passwordController,
-                    hintText: 'Password',
-                    obscureText: visibilityPassword,
-keyboardType: TextInputType.number,
-labelText: "Password",
-
-                    onTap: () {
+                    text: 'Password',
+                    isPassword: visibilityPassword,
+                    onClick: () {
                       setState(() {
                         visibilityPassword = !visibilityPassword;
                       });

@@ -145,26 +145,23 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(
                           height: kDefaultPadding,
                         ),
-                        CustomTextFormFeild(
-labelText: "Email",
+                        CustomTextFormField(
                           keyboardType: TextInputType.emailAddress,
                           controller: _emailController,
-                          hintText: 'Mobile Number /Email',
-
+                          text: 'Mobile Number /Email',
                         ),
                         const SizedBox(
                           height: kDefaultPadding,
                         ),
-                        CustomTextFormFeild(
-                          icon: visibilityPassword ? Icons
+                        CustomTextFormField(
+                          iconData: visibilityPassword ? Icons
                               .visibility_outlined : Icons
                               .visibility_off_outlined,
-                          labelText: "Password",
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           controller: _passwordController,
-                          hintText: 'Password',
-                          obscureText: visibilityPassword,
-                          onTap: () {
+                          text: 'Password',
+                          isPassword: visibilityPassword,
+                          onClick: () {
                             setState(() {
                               visibilityPassword = !visibilityPassword;
                             });

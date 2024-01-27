@@ -1,20 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:university/constants.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart' as cf;
+import 'package:university/core/key_manager.dart';
+import 'package:university/data/firebase/message_firebase.dart';
+import 'package:university/data/models/messages.dart';
 import '../../componenets/chat_bubble_model.dart';
-import '../../models/messages.dart';
 
 class Chat_Screen extends StatelessWidget {
   Chat_Screen({super.key,});
 
-  final ScrollController _controller = ScrollController();
-  TextEditingController controller = TextEditingController();
-  CollectionReference messages =
-      FirebaseFirestore.instance.collection('messages');
 
 
+
+MessageFirebase messageFirebase=MessageFirebase();
      @override
   Widget build(BuildContext context) {
 
@@ -33,65 +34,44 @@ class Chat_Screen extends StatelessWidget {
             ],
           ),
         ),
-        body: StreamBuilder<QuerySnapshot>(
-          stream: messages.orderBy('createdAt', descending: true).snapshots(),
+        body: StreamBuilder<QuerySnapshot<Message>>(
+          stream: messageFirebase.getAllMessage(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              List<Message> messagesList = [];
-              for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                messagesList.add(Message.fromJson(snapshot.data!.docs[i]));
-              }
+              List<Message> messagesList = snapshot.data?.docs
+                  .map((e) => e.data()).toList() ?? [];
+             
               return Column(
                 children: [
                   Expanded(
                     child: ListView.builder(
                       reverse: true,
-                      controller: _controller,
+                      controller: messageFirebase.listViewController,
                       itemCount: messagesList.length,
                       itemBuilder: (context, index) {
-                        return Caht_Bubble(
-                          message: messagesList[index],
-                        );
+                        if(FirebaseAuth.instance.currentUser!.uid==messagesList[index].uid){
+                          return Caht_Bubble(
+                            message: messagesList[index],
+                          );
+                        }
+                        return Caht_Bubble_re(message:  messagesList[index],);
                       },
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: TextField(
-                      controller: controller,
+                      controller: messageFirebase.messageController,
                       onSubmitted: (data) {
-                        messages.add(
-                          {
-                            'message': data,
-
-                            'createdAt': DateTime.now(),
-                          },
-                        );
-                        controller.clear();
-                        _controller.animateTo(
-                          0,
-                          curve: Curves.fastOutSlowIn,
-                          duration: const Duration(milliseconds: 500),
-                        );
+                        messageFirebase.addMessage();
                       },
                       decoration: InputDecoration(
                         hintText: 'Sent Message',
                         hintStyle: const TextStyle(color: Colors.grey),
                         suffixIcon: InkWell(
                           onTap: () {
-                            messages.add(
-                              {
-                                'message': controller.text,
-                                'createdAt': DateTime.now(),
+                            messageFirebase.addMessage();
 
-                              },
-                            );
-                            controller.clear();
-                            _controller.animateTo(
-                              0,
-                              curve: Curves.fastOutSlowIn,
-                              duration: const Duration(milliseconds: 500),
-                            );
                           },
                           child: const Icon(
                             Icons.send,
