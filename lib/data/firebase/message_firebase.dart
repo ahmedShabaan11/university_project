@@ -35,8 +35,9 @@ class MessageFirebase {
     }
   }
 
-
-  Stream<QuerySnapshot<Message>> getAllMessage(){
-    return messageRef.orderBy(JsonKeyManager.createdAt,descending: true).snapshots();
+  Stream<QuerySnapshot<Message>> getAllMessage() {
+    return messageRef
+        .orderBy(JsonKeyManager.createdAt, descending: true)
+        .snapshots();
   }
 }

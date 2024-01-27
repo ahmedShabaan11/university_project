@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:university/componenets/custom_button.dart';
 import 'package:university/componenets/custom_text_formfeild.dart';
 import 'package:university/constants.dart';
+import 'package:university/core/regex_manager.dart';
 import 'package:university/screens/home_screen/home_screen.dart';
 import 'package:university/screens/signup_screen/sign_up.dart';
 
@@ -148,7 +149,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         CustomTextFormField(
                           keyboardType: TextInputType.emailAddress,
                           controller: _emailController,
-                          text: 'Mobile Number /Email',
+                          text: 'Email',
+                          regexCondition: RegexManager.emailRegex,
+
                         ),
                         const SizedBox(
                           height: kDefaultPadding,
