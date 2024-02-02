@@ -6,4 +6,5 @@ class RegexManager{
   static const countRegex="[1-9]";
   static const nationalIdRegex="^[0-9]{14}\$";
   static const priceRegex="^(0|[1-9]|[1-9][0-9]{1,})\$";
+  static const weakPassword=".{7}";
 }

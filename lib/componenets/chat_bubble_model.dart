@@ -9,7 +9,7 @@ class Caht_Bubble extends StatelessWidget {
     required this.message,
   }) : super(key: key);
 
-  final Message message;
+  final MessageModel message;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class Caht_Bubble_re extends StatelessWidget {
     required this.message,
   }) : super(key: key);
 
-  final Message message;
+  final MessageModel message;
 
   @override
   Widget build(BuildContext context) {

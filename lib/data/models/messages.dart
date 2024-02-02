@@ -1,17 +1,17 @@
 import 'package:university/core/key_manager.dart';
 
-class Message {
+class MessageModel {
   String name;
   String? id;
   String message;
   String uid;
 
-  Message({this.id,required this.name
+  MessageModel({this.id,required this.name
     ,required this.uid,
     required this.message});
 
-  factory Message.fromJson(Map<String, dynamic> jsonData) {
-    return Message(
+  factory MessageModel.fromJson(Map<String, dynamic> jsonData) {
+    return MessageModel(
      name: jsonData[JsonKeyManager.name],
         uid:  jsonData[JsonKeyManager.uid],
         message: jsonData[JsonKeyManager.message],id: jsonData[JsonKeyManager.id]);

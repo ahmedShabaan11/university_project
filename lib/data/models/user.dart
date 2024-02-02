@@ -1,24 +1,27 @@
 import 'package:university/core/key_manager.dart';
 import 'package:university/data/firebase/user_firebase.dart';
 
-class user {
+class UserModel {
   String firstName;
   String lastName;
-  String idStu;
+  String? idStu;
+  String? uid;
   String password;
   String phone;
   String email;
 
-  user(
-      {required this.email,
+  UserModel(
+      { this.uid,
+      required this.email,
       required this.phone,
       required this.firstName,
       required this.lastName,
-      required this.idStu,
+       this.idStu,
       required this.password});
 
-  factory user.fromJsonU(Map<String, dynamic> jsonData) {
-    return user(
+  factory UserModel.fromJsonU(Map<String, dynamic> jsonData) {
+    return UserModel(
+      uid: jsonData[JsonKeyManager.uid],
       email: jsonData[JsonKeyManager.email],
       phone: jsonData[JsonKeyManager.phone],
       firstName: jsonData[JsonKeyManager.firstName],
@@ -36,6 +39,7 @@ class user {
       JsonKeyManager.passowrd: password,
       JsonKeyManager.firstName: firstName,
       JsonKeyManager.phone: phone,
+      JsonKeyManager.uid: uid,
     };
   }
 }

@@ -4,6 +4,8 @@ import 'package:university/componenets/custom_button.dart';
 import 'package:university/componenets/custom_text_formfeild.dart';
 import 'package:university/constants.dart';
 import 'package:university/core/regex_manager.dart';
+import 'package:university/data/firebase/user_firebase.dart';
+import 'package:university/data/models/user.dart';
 import 'package:university/screens/loginscreen/login.dart';
 
 class SignUp extends StatefulWidget {
@@ -18,9 +20,12 @@ class _SignUpState extends State<SignUp> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _name = TextEditingController();
-  final _latname = TextEditingController();
+  final _lastName = TextEditingController();
+  final _firstName = TextEditingController();
+  final _phone = TextEditingController();
   bool visibilityPassword = true;
+
+
 
   signUp(BuildContext context) async {
     try {
@@ -32,8 +37,16 @@ class _SignUpState extends State<SignUp> {
         );
 
         FirebaseAuth.instance.currentUser
-            ?.updateDisplayName(_name.text.trim())
+            ?.updateDisplayName(_firstName.text.trim())
             .then((value) {
+          UserModel userModel = UserModel(
+            email: _emailController.text.trim(),
+            phone: _phone.text.trim(),
+            firstName: _firstName.text.trim(),
+            lastName: _lastName.text.trim(),
+            password: _passwordController.text.trim(),
+          );
+          UserFirebase().addUser(userModel);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => LoginScreen()));
         });
@@ -73,13 +86,21 @@ class _SignUpState extends State<SignUp> {
                   ),
                   CustomTextFormField(
                     keyboardType: TextInputType.text,
-                    controller: _name,
+                    controller: _firstName,
                     text: "First Name",
+                    regexCondition: RegexManager.stringRegex,
                   ),
                   CustomTextFormField(
                     keyboardType: TextInputType.text,
-                    controller: _latname,
+                    controller: _lastName,
                     text: 'Last Name',
+                    regexCondition: RegexManager.stringRegex,
+                  ),
+                  CustomTextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _phone,
+                    text: 'Phone',
+                    regexCondition: RegexManager.phoneRegex,
                   ),
                   CustomTextFormField(
                     keyboardType: TextInputType.emailAddress,
@@ -98,6 +119,7 @@ class _SignUpState extends State<SignUp> {
                     controller: _passwordController,
                     text: 'Password',
                     isPassword: visibilityPassword,
+                    regexCondition: RegexManager.weakPassword,
                     onClick: () {
                       setState(() {
                         visibilityPassword = !visibilityPassword;

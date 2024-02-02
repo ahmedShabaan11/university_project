@@ -34,11 +34,11 @@ MessageFirebase messageFirebase=MessageFirebase();
             ],
           ),
         ),
-        body: StreamBuilder<QuerySnapshot<Message>>(
+        body: StreamBuilder<QuerySnapshot<MessageModel>>(
           stream: messageFirebase.getAllMessage(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              List<Message> messagesList = snapshot.data?.docs
+              List<MessageModel> messagesList = snapshot.data?.docs
                   .map((e) => e.data()).toList() ?? [];
              
               return Column(

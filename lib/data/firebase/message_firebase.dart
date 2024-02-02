@@ -7,15 +7,15 @@ import 'package:flutter/material.dart';
 class MessageFirebase {
  ScrollController listViewController = ScrollController();
   TextEditingController messageController = TextEditingController();
-  final messageRef = FirebaseFirestore.instance.collection("Messages").withConverter<Message>(
-          fromFirestore: (snapshot, _) => Message.fromJson(snapshot.data()!),
+  final messageRef = FirebaseFirestore.instance.collection("Messages").withConverter<MessageModel>(
+          fromFirestore: (snapshot, _) => MessageModel.fromJson(snapshot.data()!),
         toFirestore: (message, _) => message.toJson());
 
   addMessage() async {
     try {
 
       final doc = messageRef.doc();
-      Message message = Message(
+      MessageModel message = MessageModel(
         name:FirebaseAuth.instance.currentUser!.displayName! ,
         id: doc.id,
         uid: FirebaseAuth.instance.currentUser!.uid,
@@ -37,7 +37,7 @@ class MessageFirebase {
     }
   }
 
-  Stream<QuerySnapshot<Message>> getAllMessage() {
+  Stream<QuerySnapshot<MessageModel>> getAllMessage() {
     return messageRef
         .orderBy(JsonKeyManager.createdAt, descending: true)
         .snapshots();
