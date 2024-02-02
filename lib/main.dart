@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-debugShowCheckedModeBanner: false ,
+      debugShowCheckedModeBanner: false,
 
       title: "My University",
 //we will use light theme for  our app
@@ -108,6 +109,5 @@ debugShowCheckedModeBanner: false ,
       //define the routes file here in order to access the routes any where all over the app
       routes: routes,
     );
-
   }
 }

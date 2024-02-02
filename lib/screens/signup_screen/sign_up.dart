@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp> {
         );
 
         FirebaseAuth.instance.currentUser
-            ?.updateDisplayName(_firstName.text.trim())
+            ?.updateDisplayName(_firstName.text+" "+_lastName.text)
             .then((value) {
           UserModel userModel = UserModel(
             email: _emailController.text.trim(),

@@ -10,5 +10,5 @@ Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => const SplashScreen(),
   LoginScreen.routeName: (context) => LoginScreen(),
   HomeScreen.id: (context) =>  HomeScreen(),
-  MyProfileScreens.routeName: (context) => const MyProfileScreens(),
+  MyProfileScreens.routeName: (context) =>  MyProfileScreens(),
 };
