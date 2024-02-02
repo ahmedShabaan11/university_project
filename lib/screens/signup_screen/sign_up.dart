@@ -19,6 +19,7 @@ class _SignUpState extends State<SignUp> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _name = TextEditingController();
+  final _latname = TextEditingController();
   bool visibilityPassword = true;
 
   signUp(BuildContext context) async {
@@ -29,6 +30,7 @@ class _SignUpState extends State<SignUp> {
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
+
         FirebaseAuth.instance.currentUser
             ?.updateDisplayName(_name.text.trim())
             .then((value) {
@@ -38,7 +40,7 @@ class _SignUpState extends State<SignUp> {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        const Text('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
       }
@@ -72,8 +74,12 @@ class _SignUpState extends State<SignUp> {
                   CustomTextFormField(
                     keyboardType: TextInputType.text,
                     controller: _name,
-                    text: "Name",
-
+                    text: "First Name",
+                  ),
+                  CustomTextFormField(
+                    keyboardType: TextInputType.text,
+                    controller: _latname,
+                    text: 'Last Name',
                   ),
                   CustomTextFormField(
                     keyboardType: TextInputType.emailAddress,
@@ -85,7 +91,6 @@ class _SignUpState extends State<SignUp> {
                     height: kDefaultPadding,
                   ),
                   CustomTextFormField(
-
                     iconData: visibilityPassword
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,

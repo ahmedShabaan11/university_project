@@ -1,5 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:university/data/models/chat_model.dart';
+import 'package:university/componenets/chat_model.dart';
 
 import '../constants.dart';
 import '../screens/my_profile/my_profile.dart';
@@ -55,7 +56,7 @@ class homeComponents extends StatelessWidget {
                                     ),
                           ),
                           Text(
-                            "Sally",
+                           FirebaseAuth.instance.currentUser!.displayName!,
                             style:
                                 Theme.of(context).textTheme.subtitle1!.copyWith(
                                       fontWeight: FontWeight.w700,

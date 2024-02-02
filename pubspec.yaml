@@ -44,6 +44,7 @@ dependencies:
   firebase_auth: ^4.1.4
   listview_infinite_pagination: ^0.0.14
   auto_scroll: ^0.2.0
+  image_picker: ^1.0.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

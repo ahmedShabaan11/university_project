@@ -29,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
     return Container(
       // margin: EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
-        style: TextStyle(color: Colors.black,fontSize: 18),
+        style: const TextStyle(color: Colors.black,fontSize: 18),
         onChanged: onChange,
         validator: validator ??
                 (value) {
@@ -48,7 +48,7 @@ class CustomTextFormField extends StatelessWidget {
         keyboardType: keyboardType,
         decoration: InputDecoration(
           isDense: true,
-          contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+          contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
           labelText: text!.toUpperCase(),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),

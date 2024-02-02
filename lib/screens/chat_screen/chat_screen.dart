@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:university/constants.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_firestore/cloud_firestore.dart' as cf;
+
 import 'package:university/core/key_manager.dart';
 import 'package:university/data/firebase/message_firebase.dart';
 import 'package:university/data/models/messages.dart';
@@ -64,6 +64,7 @@ MessageFirebase messageFirebase=MessageFirebase();
                       controller: messageFirebase.messageController,
                       onSubmitted: (data) {
                         messageFirebase.addMessage();
+
                       },
                       decoration: InputDecoration(
                         hintText: 'Sent Message',

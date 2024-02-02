@@ -5,27 +5,29 @@ import 'package:university/data/models/messages.dart';
 import 'package:flutter/material.dart';
 
 class MessageFirebase {
-  ScrollController listViewController = ScrollController();
+ ScrollController listViewController = ScrollController();
   TextEditingController messageController = TextEditingController();
-  final messageRef = FirebaseFirestore.instance
-      .collection("Messages")
-      .withConverter<Message>(
+  final messageRef = FirebaseFirestore.instance.collection("Messages").withConverter<Message>(
           fromFirestore: (snapshot, _) => Message.fromJson(snapshot.data()!),
-          toFirestore: (message, _) => message.toJson());
+        toFirestore: (message, _) => message.toJson());
 
   addMessage() async {
     try {
+
       final doc = messageRef.doc();
       Message message = Message(
+        name:FirebaseAuth.instance.currentUser!.displayName! ,
         id: doc.id,
         uid: FirebaseAuth.instance.currentUser!.uid,
         message: messageController.text.trim(),
+
       );
 
       await doc.set(message).then((value) {
         listViewController.animateTo(
           0,
           curve: Curves.fastOutSlowIn,
+
           duration: const Duration(milliseconds: 500),
         );
         messageController.clear();

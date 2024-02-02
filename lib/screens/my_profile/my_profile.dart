@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:university/componenets/list_tile_column.dart';
 import 'package:university/componenets/profiledetailrow.dart';
@@ -7,7 +8,6 @@ class MyProfileScreens extends StatelessWidget {
   const MyProfileScreens({super.key});
 
   static String routeName = 'MyProfileScreens';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +64,8 @@ class MyProfileScreens extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          'Sally Ahmed',
+                        Text("hi ${FirebaseAuth.instance.currentUser!.displayName!}"
+                          ,
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                         Text(
@@ -76,7 +76,7 @@ class MyProfileScreens extends StatelessWidget {
                               .copyWith(fontSize: 14.0),
                         )
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -108,9 +108,9 @@ class MyProfileScreens extends StatelessWidget {
                 ],
               ),
               sizedBox,
-              const ListTileColumn(
+               ListTileColumn(
                 title: 'Email',
-                value: 'sallyahmd@gamil.com',
+                value:FirebaseAuth.instance.currentUser!.email.toString() ,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -120,7 +120,7 @@ class MyProfileScreens extends StatelessWidget {
               ),
               const ListTileColumn(
                 title: 'Father Name',
-                value: 'Ahmed Mas',
+                value:"FirebaseAuth.instance.currentUser",
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -129,8 +129,8 @@ class MyProfileScreens extends StatelessWidget {
                 ),
               ),
               const ListTileColumn(
-                title: 'Mother Name',
-                value: 'Angelica',
+                title: 'Id',
+                value: '',
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -138,15 +138,15 @@ class MyProfileScreens extends StatelessWidget {
                   thickness: 2.0,
                 ),
               ),
-              const ListTileColumn(
+
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: const Divider(
+                  thickness: 2.0,
+                ),
+              ), const ListTileColumn(
                 title: 'Phone Number',
                 value: '01555498432',
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: const Divider(
-                  thickness: 2.0,
-                ),
               ),
             ],
           ),
