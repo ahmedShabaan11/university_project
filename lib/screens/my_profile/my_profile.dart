@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:university/componenets/imagepickr.dart';
 import 'package:university/componenets/list_tile_column.dart';
 import 'package:university/componenets/profiledetailrow.dart';
 import 'package:university/constants.dart';
@@ -16,15 +17,9 @@ class MyProfileScreens extends StatelessWidget {
   });
 
   static String routeName = 'MyProfileScreens';
-  UserModel? userModel;
-  File? image;
-  final imagePicker = ImagePicker();
 
-  uploadImage() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-  image =File(pickedImage!.path);
-  }
+  UserModel? userModel;
+  ImagePickModel? imagePickModel;
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +77,8 @@ class MyProfileScreens extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             InkWell(
-                              onTap: uploadImage,
-                              child:  CircleAvatar(
+                              onTap: imagePickModel!.uploadImage(),
+                              child:  const CircleAvatar(
                                 maxRadius: 50,
                                 minRadius: 50,
                                 backgroundColor: kSecondaryColor,
