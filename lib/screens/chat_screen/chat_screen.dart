@@ -9,10 +9,10 @@ import 'package:university/data/firebase/message_firebase.dart';
 import 'package:university/data/models/messages.dart';
 import '../../componenets/chat_bubble_model.dart';
 
-class Chat_Screen extends StatelessWidget {
-  Chat_Screen({super.key,});
+class GroupChat_Screen extends StatelessWidget {
+  GroupChat_Screen({super.key,});
 
-
+static String id="groupChat";
 
 
 MessageFirebase messageFirebase=MessageFirebase();
@@ -30,7 +30,7 @@ MessageFirebase messageFirebase=MessageFirebase();
                 'assets/images/scholar.png',
                 height: 50,
               ),
-              const Text('Chat'),
+              const Text('Student Group'),
             ],
           ),
         ),
@@ -73,7 +73,6 @@ MessageFirebase messageFirebase=MessageFirebase();
                         suffixIcon: InkWell(
                           onTap: () {
                             messageFirebase.addMessage();
-
                           },
                           child: const Icon(
                             Icons.send,

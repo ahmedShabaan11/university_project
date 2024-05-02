@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:university/screens/chat_screen/chat_list.dart';
+import 'package:university/screens/chat_screen/chat_screen.dart';
 import 'package:university/screens/home_screen/admin_home_screen.dart';
 import 'package:university/screens/home_screen/prof_home_screen.dart';
 import 'package:university/screens/home_screen/student_home_screen.dart';
@@ -13,6 +14,7 @@ Map<String, WidgetBuilder> routes = {
 //all screens will be registred  here like mainfest in android
   SplashScreen.routeName: (context) => const SplashScreen(),
   LoginScreen.routeName: (context) => LoginScreen(),
+  GroupChat_Screen.id:(_)=>GroupChat_Screen(),
   StudentHomeScreen.studentHome: (context) =>  StudentHomeScreen(),
    MyProfileScreens.routeName: (context) =>  MyProfileScreens(),
    SignUpProf.newProfAcc: (context) =>  SignUpProf(),

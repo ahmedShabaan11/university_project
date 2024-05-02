@@ -8,7 +8,7 @@ import 'package:university/screens/chat_screen/component/global_search_bar.dart'
 class ProfHomeScreen extends StatefulWidget {
   const ProfHomeScreen({super.key});
 
-  static String profHome = "profHome";
+  static String profHome = "doctor";
 
   @override
   State<ProfHomeScreen> createState() => _ProfHomeScreenState();

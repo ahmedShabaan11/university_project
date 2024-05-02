@@ -9,7 +9,7 @@ import '../../componenets/home_components.dart';
 class StudentHomeScreen extends StatelessWidget {
   StudentHomeScreen({super.key});
 
-  static String studentHome = 'studentHome';
+  static String studentHome = 'student';
   @override
   Widget build(BuildContext context) {
 

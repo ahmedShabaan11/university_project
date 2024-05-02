@@ -22,46 +22,16 @@ class CustomTheme {
       ),
       elevation: 0,
     ),
-    //input decoration theme for all our the app
-    // inputDecorationTheme: InputDecorationTheme(
-    //   //label style for formField
-    //   // labelStyle: TextStyle(
-    //   //     fontSize: 11.sp, color: kTextLightColor, fontWeight: FontWeight.w400),
-    //   // //hint style
-    //   // hintStyle: TextStyle(fontSize: 16.0, color: kTextBlackColor, height: 0.5),
-    //   // //we are using underline input border
-    //   // //not outline
-    //   border: OutlineInputBorder(
-    //     borderRadius: BorderRadius.circular(15)
-    //   )
-    //   // enabledBorder: const UnderlineInputBorder(
-    //   //   borderSide: BorderSide(color: kTextLightColor, width: 0.7),
-    //   // ),
-    //   // border: const UnderlineInputBorder(
-    //   //   borderSide: BorderSide(color: kTextLightColor),
-    //   // ),
-    //   // disabledBorder: const UnderlineInputBorder(
-    //   //   borderSide: BorderSide(color: kTextLightColor),
-    //   // ),
-    //   // // on focus  change color
-    //   // focusedBorder: const UnderlineInputBorder(
-    //   //   borderSide: BorderSide(
-    //   //     color: kPrimaryColor,
-    //   //   ),
-    //   // ),
-    //   // //color changes when user enters wrong information,
-    //   // //we will use validators for this process
-    //   // errorBorder: const UnderlineInputBorder(
-    //   //   borderSide: BorderSide(color: kErrorBorderColor, width: 1.2),
-    //   // ),
-    //   // //same on focus error color
-    //   // focusedErrorBorder: const UnderlineInputBorder(
-    //   //   borderSide: BorderSide(
-    //   //     color: kErrorBorderColor,
-    //   //     width: 1.2,
-    //   //   ),
-    //   // ),
-    // ),
+    // input decoration theme for all our the app
+    inputDecorationTheme: InputDecorationTheme(
+      //label style for formField
+      // labelStyle: TextStyle(
+      //     fontSize: 11.sp, co lor: kTextLightColor, fontWeight: FontWeight.w400),
+      // //hint style
+      // hintStyle: TextStyle(fontSize: 16.0, color: kTextBlackColor, height: 0.5),
+      // //we are using underline input border
+      // //not outline
+    ),
     textTheme: GoogleFonts.poppinsTextTheme().copyWith(
       //custom text for bodyText1
       headline5: GoogleFonts.chewy(

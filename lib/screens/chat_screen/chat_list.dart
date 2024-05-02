@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:university/constants.dart';
 import 'package:university/data/firebase/user_firebase.dart';
 import 'package:university/data/models/user.dart';
+import 'package:university/screens/chat_screen/chat_screen.dart';
 import 'package:university/screens/chat_screen/component/chat_item.dart';
 import 'package:university/screens/chat_screen/component/global_search_bar.dart';
 import 'package:university/screens/home_screen/student_home_screen.dart';
@@ -27,7 +28,6 @@ class _ChatListState extends State<ChatList> {
 
   @override
   Widget build(BuildContext context) {
-    UserFirebase userFirebase = UserFirebase();
     return Scaffold(
       appBar: AppBar(
         title: Text("Chat"),
@@ -36,7 +36,6 @@ class _ChatListState extends State<ChatList> {
       body: isSearch
           ? GlobalSearchBar(
               isVisible: isVisible,
-              items: ["hassan", "ahmed", "alaa", "iboo"],
             )
           : Column(
               children: [
@@ -46,26 +45,32 @@ class _ChatListState extends State<ChatList> {
                 ),
                 if (FirebaseAuth.instance.currentUser!.photoURL ==
                     StudentHomeScreen.studentHome)
-                  ChatItem(title: "Student Group"),
+                  ChatItem(title: "Student Group",type: "",onTap: (){
+                    Navigator.pushNamed(context, GroupChat_Screen.id);
+                  },),
                 Expanded(
-                    child: StreamBuilder<QuerySnapshot<UserModel>>(
-                        stream: FirebaseAuth.instance.currentUser!.photoURL ==
-                                StudentHomeScreen.studentHome
-                            ? userFirebase.getAllUsers()
-                            : userFirebase.getAllStudent(),
-                        builder: (context, snapshot) {
-    if (snapshot.hasData) {
-    List<UserModel> usersList = snapshot.data?.docs
-        .map((e) => e.data()).toList() ?? [];
-                          return ListView.builder(
-                              itemCount: usersList.length,
-                              itemBuilder: (context, index) {
-                                return ChatItem(title:"${usersList[index].firstName} ${usersList[index].lastName}");
-                              });}else{
-      return const Center(child: Text('loading..'));
-
-    }
-                        }))
+                    child:Container()
+    //
+    //                 StreamBuilder<QuerySnapshot<UserModel>>(
+    //                     stream: FirebaseAuth.instance.currentUser!.photoURL ==
+    //                             StudentHomeScreen.studentHome
+    //                         ? userFirebase.getAllUsers()
+    //                         : userFirebase.getAllStudent(),
+    //                     builder: (context, snapshot) {
+    // if (snapshot.hasData) {
+    // List<UserModel> usersList = snapshot.data?.docs
+    //     .map((e) => e.data()).toList() ?? [];
+    //                       return ListView.builder(
+    //                           itemCount: usersList.length,
+    //                           itemBuilder: (context, index) {
+    //                             return ChatItem(title:"${usersList[index].firstName} ${usersList[index].lastName}");
+    //                           });}else{
+    //   return const Center(child: Text('loading..'));
+    //
+    // }
+    //
+    //                     })
+                )
               ],
             ),
     );
