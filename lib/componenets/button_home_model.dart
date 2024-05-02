@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:university/screens/chat_screen/chat_list.dart';
-import 'package:university/screens/chat_screen/chat_screen.dart';
+import 'package:university/screens/chat_screen/group_chat_screen.dart';
 import 'package:university/screens/signup_screen/sign_up_prof.dart';
 
 class ButtonHomeModel {

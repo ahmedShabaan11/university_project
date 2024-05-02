@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:university/screens/chat_screen/chat_list.dart';
 import 'package:university/screens/chat_screen/chat_screen.dart';
+import 'package:university/screens/chat_screen/first_chat_screen.dart';
+import 'package:university/screens/chat_screen/group_chat_screen.dart';
 import 'package:university/screens/home_screen/admin_home_screen.dart';
 import 'package:university/screens/home_screen/prof_home_screen.dart';
 import 'package:university/screens/home_screen/student_home_screen.dart';
@@ -22,4 +24,6 @@ Map<String, WidgetBuilder> routes = {
   ProfHomeScreen.profHome: (context) =>  ProfHomeScreen(),
    MyProfileScreens.routeName: (context) =>  MyProfileScreens(),
    ChatList.chatList: (context) =>  ChatList(),
+   ChatScreen.chatScreen: (context) =>  ChatScreen(),
+   FirstChatScreen.firstChatScreen: (context) =>  FirstChatScreen(),
 };

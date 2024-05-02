@@ -5,29 +5,29 @@ import 'package:university/data/models/messages.dart';
 import 'package:flutter/material.dart';
 
 class MessageFirebase {
- ScrollController listViewController = ScrollController();
+  ScrollController listViewController = ScrollController();
   TextEditingController messageController = TextEditingController();
-  final messageRef = FirebaseFirestore.instance.collection("Messages").withConverter<MessageModel>(
-          fromFirestore: (snapshot, _) => MessageModel.fromJson(snapshot.data()!),
-        toFirestore: (message, _) => message.toJson());
+  final messageRef = FirebaseFirestore.instance
+      .collection("Messages")
+      .withConverter<MessageModel>(
+          fromFirestore: (snapshot, _) =>
+              MessageModel.fromJson(snapshot.data()!),
+          toFirestore: (message, _) => message.toJson());
 
   addMessage() async {
     try {
-
       final doc = messageRef.doc();
       MessageModel message = MessageModel(
-        name:FirebaseAuth.instance.currentUser!.displayName! ,
+        name: FirebaseAuth.instance.currentUser!.displayName!,
         id: doc.id,
         uid: FirebaseAuth.instance.currentUser!.uid,
         message: messageController.text.trim(),
-
       );
 
       await doc.set(message).then((value) {
         listViewController.animateTo(
           0,
           curve: Curves.fastOutSlowIn,
-
           duration: const Duration(milliseconds: 500),
         );
         messageController.clear();
@@ -41,5 +41,35 @@ class MessageFirebase {
     return messageRef
         .orderBy(JsonKeyManager.createdAt, descending: true)
         .snapshots();
+  }
+
+  Stream<QuerySnapshot<MessageModel>> getAllPrivateMessage(String chatId) {
+    return messageRef
+        .orderBy(JsonKeyManager.createdAt, descending: true)
+        .where(JsonKeyManager.chatId, isEqualTo: chatId)
+        .snapshots();
+  }
+
+  addPrivateMessage(String chatId,String text) async {
+    try {
+      final doc = messageRef.doc();
+      MessageModel message = MessageModel(
+          name: FirebaseAuth.instance.currentUser!.displayName!,
+          id: doc.id,
+          uid: FirebaseAuth.instance.currentUser!.uid,
+          message:text.trim(),
+          chatId: chatId);
+
+      await doc.set(message).then((value) {
+        listViewController.animateTo(
+          0,
+          curve: Curves.fastOutSlowIn,
+          duration: const Duration(milliseconds: 500),
+        );
+        messageController.clear();
+      });
+    } on Exception catch (e) {
+      print(e.toString());
+    }
   }
 }

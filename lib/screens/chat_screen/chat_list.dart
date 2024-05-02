@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:university/constants.dart';
+import 'package:university/data/firebase/private_chat_firebase.dart';
 import 'package:university/data/firebase/user_firebase.dart';
+import 'package:university/data/models/private_chat_model.dart';
 import 'package:university/data/models/user.dart';
 import 'package:university/screens/chat_screen/chat_screen.dart';
+import 'package:university/screens/chat_screen/group_chat_screen.dart';
 import 'package:university/screens/chat_screen/component/chat_item.dart';
 import 'package:university/screens/chat_screen/component/global_search_bar.dart';
 import 'package:university/screens/home_screen/student_home_screen.dart';
@@ -25,7 +28,7 @@ class _ChatListState extends State<ChatList> {
     isSearch = !isSearch;
     setState(() {});
   }
-
+  PrivateChatFirebase privateChatFirebase=PrivateChatFirebase();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,44 +38,47 @@ class _ChatListState extends State<ChatList> {
       backgroundColor: kOtherColor,
       body: isSearch
           ? GlobalSearchBar(
-              isVisible: isVisible,
-            )
+        isVisible: isVisible,
+      )
           : Column(
-              children: [
-                InkWell(
-                  onTap: isVisible,
-                  child: Icon(Icons.search),
-                ),
-                if (FirebaseAuth.instance.currentUser!.photoURL ==
-                    StudentHomeScreen.studentHome)
-                  ChatItem(title: "Student Group",type: "",onTap: (){
-                    Navigator.pushNamed(context, GroupChat_Screen.id);
-                  },),
-                Expanded(
-                    child:Container()
-    //
-    //                 StreamBuilder<QuerySnapshot<UserModel>>(
-    //                     stream: FirebaseAuth.instance.currentUser!.photoURL ==
-    //                             StudentHomeScreen.studentHome
-    //                         ? userFirebase.getAllUsers()
-    //                         : userFirebase.getAllStudent(),
-    //                     builder: (context, snapshot) {
-    // if (snapshot.hasData) {
-    // List<UserModel> usersList = snapshot.data?.docs
-    //     .map((e) => e.data()).toList() ?? [];
-    //                       return ListView.builder(
-    //                           itemCount: usersList.length,
-    //                           itemBuilder: (context, index) {
-    //                             return ChatItem(title:"${usersList[index].firstName} ${usersList[index].lastName}");
-    //                           });}else{
-    //   return const Center(child: Text('loading..'));
-    //
-    // }
-    //
-    //                     })
-                )
-              ],
-            ),
+        children: [
+          InkWell(
+            onTap: isVisible,
+            child: Icon(Icons.search),
+          ),
+          if (FirebaseAuth.instance.currentUser!.photoURL ==
+              StudentHomeScreen.studentHome)
+            ChatItem(title: "Student Group", type: "", onTap: () {
+              Navigator.pushNamed(context, GroupChat_Screen.id);
+            },),
+          Expanded(
+              child:
+
+              StreamBuilder<QuerySnapshot<PrivateChatModel>>(
+                  stream:privateChatFirebase.getAllPrivateChat(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<PrivateChatModel> privateChatList = snapshot.data
+                          ?.docs
+                          .map((e) => e.data()).toList() ?? [];
+                      return ListView.builder(
+                          itemCount: privateChatList.length,
+                          itemBuilder: (context, index) {
+                            if(privateChatList[index].from==FirebaseAuth.instance.currentUser!.uid||privateChatList[index].to==FirebaseAuth.instance.currentUser!.uid){
+                              return ChatItem(title: privateChatList[index].name,
+                                type: privateChatList[index].type,onTap: (){
+                                  Navigator.pushNamed(context, ChatScreen.chatScreen,arguments: privateChatList[index].id);
+                                },);
+                            }
+                            return Container();
+                          });
+                    } else {
+                      return const Center(child: Text('loading..'));
+                    }
+                  })
+          )
+        ],
+      ),
     );
   }
 }

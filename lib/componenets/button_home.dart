@@ -14,7 +14,7 @@ class ButtonHome extends StatelessWidget {
       onTap: () => buttonHomeModel.onTap(context),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.lightGreen,
+          color: kPrimaryColor,
           borderRadius: BorderRadius.circular(kDefaultPadding),
         ),
         width: MediaQuery.of(context).size.width / 2.5,

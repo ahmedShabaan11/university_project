@@ -9,13 +9,21 @@ import 'package:university/data/models/messages.dart';
 import 'package:university/data/models/private_chat_model.dart';
 import 'package:university/data/models/user.dart';
 
-class ChatScreen extends StatelessWidget {
-  ChatScreen({super.key});
-  static String chatScreen="chatScreen";
+class FirstChatScreen extends StatefulWidget {
+  FirstChatScreen({super.key});
+
+  static String firstChatScreen = "firstChatScreen";
+
+  @override
+  State<FirstChatScreen> createState() => _FirstChatScreenState();
+}
+
+class _FirstChatScreenState extends State<FirstChatScreen> {
   @override
   Widget build(BuildContext context) {
-    MessageFirebase messageFirebase=MessageFirebase();
-    String chatId = ModalRoute.of(context)!.settings.arguments as String;
+    MessageFirebase messageFirebase = MessageFirebase();
+    final userModel = ModalRoute.of(context)!.settings.arguments as UserModel;
+    String chatId = "";
     final controller = TextEditingController();
     return Scaffold(
       backgroundColor: kOtherColor,
@@ -44,7 +52,7 @@ class ChatScreen extends StatelessWidget {
                     );
                                         },
                                       );
-                  }else{
+                  } else {
                     return const Center(child: Text('loading..'));
                   }
                 }),
@@ -52,7 +60,19 @@ class ChatScreen extends StatelessWidget {
           TextFormField(
             controller: controller,
             decoration: InputDecoration(
-                suffixIcon: InkWell(
+                suffixIcon: chatId.isEmpty
+                    ? InkWell(
+                        child: Icon(Icons.send),
+                        onTap: () async {
+                          await PrivateChatFirebase()
+                              .createPrivateChat(userModel, controller.text);
+                          // chatId = await PrivateChatFirebase()
+                          //     .getLastPrivateChatId()
+                          //     .id;
+                          setState(() {});
+                        },
+                      )
+                    : InkWell(
                         child: Icon(Icons.send),
                         onTap: () async {
                           await MessageFirebase()

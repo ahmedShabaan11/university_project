@@ -15,6 +15,7 @@ class JsonKeyManager{
  static const String type ="type";
  static const String from ="from";
  static const String to ="to";
+ static const String chatId="chatId";
 
 
 
