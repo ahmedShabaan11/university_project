@@ -11,7 +11,12 @@ class JsonKeyManager{
  static const String phone ="phone";
  static const String firstName ="firstName";
  static const String lastName ="lastName";
- static const String passowrd ="passowrd";
+ static const String password ="password";
+ static const String type ="type";
+ static const String from ="from";
+ static const String to ="to";
+
+
 
 }
 

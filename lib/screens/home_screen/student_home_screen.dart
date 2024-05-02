@@ -6,15 +6,15 @@ import 'package:university/screens/my_profile/my_profile.dart';
 
 import '../../componenets/home_components.dart';
 
-class HomeScreen extends StatelessWidget {
-   HomeScreen({super.key});
+class StudentHomeScreen extends StatelessWidget {
+  StudentHomeScreen({super.key});
 
-  static String id = 'HomeScreen';
+  static String studentHome = 'studentHome';
   @override
   Widget build(BuildContext context) {
 
     return const Scaffold(
-      body: homeComponents()
+      body: StudentHomeComponents()
 
     );
   }

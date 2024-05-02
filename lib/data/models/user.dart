@@ -9,6 +9,7 @@ class UserModel {
   String password;
   String phone;
   String email;
+  String type;
 
   UserModel(
       { this.uid,
@@ -17,7 +18,7 @@ class UserModel {
       required this.firstName,
       required this.lastName,
        this.idStu,
-      required this.password});
+      required this.password,required this.type});
 
   factory UserModel.fromJsonU(Map<String, dynamic> jsonData) {
     return UserModel(
@@ -27,7 +28,8 @@ class UserModel {
       firstName: jsonData[JsonKeyManager.firstName],
       lastName: jsonData[JsonKeyManager.lastName],
       idStu: jsonData[JsonKeyManager.idStu],
-      password: jsonData[JsonKeyManager.passowrd],
+      password: jsonData[JsonKeyManager.password],
+      type: jsonData[JsonKeyManager.type]
     );
   }
 
@@ -36,10 +38,11 @@ class UserModel {
       JsonKeyManager.email: email,
       JsonKeyManager.idStu: idStu,
       JsonKeyManager.lastName: lastName,
-      JsonKeyManager.passowrd: password,
+      JsonKeyManager.password: password,
       JsonKeyManager.firstName: firstName,
       JsonKeyManager.phone: phone,
       JsonKeyManager.uid: uid,
+      JsonKeyManager.type: type,
     };
   }
 }

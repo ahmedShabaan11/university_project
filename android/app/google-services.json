@@ -1,32 +1,13 @@
 {
   "project_info": {
-    "project_number": "1086690705290",
-    "project_id": "big-lore-386620",
-    "storage_bucket": "big-lore-386620.appspot.com"
+    "project_number": "955168211941",
+    "project_id": "universty-app-shabaan",
+    "storage_bucket": "universty-app-shabaan.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1086690705290:android:bcc8726b10d42135251273",
-        "android_client_info": {
-          "package_name": "chat.co"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC-EYMRS5uWR5frex63vUCsfZWbiXfFtXU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1086690705290:android:a8b553f10f9e5088251273",
+        "mobilesdk_app_id": "1:955168211941:android:fd98743c8ad2eeb7b2e50c",
         "android_client_info": {
           "package_name": "com.example.university"
         }
@@ -34,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC-EYMRS5uWR5frex63vUCsfZWbiXfFtXU"
+          "current_key": "AIzaSyBRwzGdw0jjPQ84yw0weMjhhr8AGK7Jc-A"
         }
       ],
       "services": {

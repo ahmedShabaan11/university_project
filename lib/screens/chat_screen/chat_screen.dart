@@ -39,6 +39,7 @@ MessageFirebase messageFirebase=MessageFirebase();
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               List<MessageModel> messagesList = snapshot.data?.docs
+
                   .map((e) => e.data()).toList() ?? [];
              
               return Column(

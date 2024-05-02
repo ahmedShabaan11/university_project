@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:university/componenets/chat_model.dart';
+import 'package:university/componenets/button_home_model.dart';
 
 import '../constants.dart';
 import '../screens/my_profile/my_profile.dart';
 import 'button_home.dart';
 
-class homeComponents extends StatelessWidget {
-  const homeComponents({super.key});
+class StudentHomeComponents extends StatelessWidget {
+  const StudentHomeComponents({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -194,9 +194,9 @@ class homeComponents extends StatelessWidget {
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
               ),
-              itemCount: listButtonHome.length,
+              itemCount: listStudentHomeButton.length,
               itemBuilder: (context, index) =>
-                  ButtonHome(buttonHomeModel: listButtonHome[index]),
+                  ButtonHome(buttonHomeModel: listStudentHomeButton[index]),
             ),
           ),
         ),

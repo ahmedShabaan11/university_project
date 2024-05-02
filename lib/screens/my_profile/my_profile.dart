@@ -76,16 +76,16 @@ class MyProfileScreens extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            InkWell(
-                              onTap: imagePickModel!.uploadImage(),
-                              child:  const CircleAvatar(
-                                maxRadius: 50,
-                                minRadius: 50,
-                                backgroundColor: kSecondaryColor,
-                                backgroundImage:  AssetImage(
-                                    'assets/images/blank-profile-picture-973460_1280.png'),
-                              ),
-                            ),
+                            // InkWell(
+                            //   onTap: imagePickModel!.uploadImage(),
+                            //   child:  const CircleAvatar(
+                            //     maxRadius: 50,
+                            //     minRadius: 50,
+                            //     backgroundColor: kSecondaryColor,
+                            //     backgroundImage:  AssetImage(
+                            //         'assets/images/blank-profile-picture-973460_1280.png'),
+                            //   ),
+                            // ),
                             kWidthSizedBox,
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

@@ -6,18 +6,18 @@ import 'package:university/constants.dart';
 import 'package:university/core/regex_manager.dart';
 import 'package:university/data/firebase/user_firebase.dart';
 import 'package:university/data/models/user.dart';
-import 'package:university/screens/home_screen/admin_home_screen.dart';
+import 'package:university/screens/home_screen/prof_home_screen.dart';
 import 'package:university/screens/home_screen/student_home_screen.dart';
 import 'package:university/screens/loginscreen/login.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
-
+class SignUpProf extends StatefulWidget {
+  const SignUpProf({super.key});
+static String newProfAcc="newProfAccount";
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignUpProf> createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpState extends State<SignUpProf> {
   final _formKey = GlobalKey<FormState>();
 
   final _emailController = TextEditingController();
@@ -48,11 +48,11 @@ class _SignUpState extends State<SignUp> {
         FirebaseAuth.instance.currentUser
             ?.updateDisplayName(_firstName.text+" "+_lastName.text);
         FirebaseAuth.instance.currentUser
-            ?.updatePhotoURL(StudentHomeScreen.studentHome).then((value) {
-              userModel.type=StudentHomeScreen.studentHome;
+            ?.updatePhotoURL(ProfHomeScreen.profHome).then((value) {
+              userModel.type=ProfHomeScreen.profHome;
           UserFirebase().addUser(userModel);
-          Navigator.pushReplacementNamed(
-              context, LoginScreen.routeName);
+              Navigator.pop(
+                  context);
         });
 
 

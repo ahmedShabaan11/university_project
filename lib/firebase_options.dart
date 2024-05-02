@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBbfcGy9UPcgu3TzbUwIsZiGmABnD-bClM',
-    appId: '1:1086690705290:web:0f007ff83fdcd0c5251273',
-    messagingSenderId: '1086690705290',
-    projectId: 'big-lore-386620',
-    authDomain: 'big-lore-386620.firebaseapp.com',
-    storageBucket: 'big-lore-386620.appspot.com',
-    measurementId: 'G-DM6HLBPS9H',
+    apiKey: 'AIzaSyAB97xkwhJVYV9puHwURCdzO8LrpDw7EwA',
+    appId: '1:955168211941:web:9df9a1ec73604b61b2e50c',
+    messagingSenderId: '955168211941',
+    projectId: 'universty-app-shabaan',
+    authDomain: 'universty-app-shabaan.firebaseapp.com',
+    storageBucket: 'universty-app-shabaan.appspot.com',
+    measurementId: 'G-RPSQ700RK6',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC-EYMRS5uWR5frex63vUCsfZWbiXfFtXU',
-    appId: '1:1086690705290:android:a8b553f10f9e5088251273',
-    messagingSenderId: '1086690705290',
-    projectId: 'big-lore-386620',
-    storageBucket: 'big-lore-386620.appspot.com',
+    apiKey: 'AIzaSyBRwzGdw0jjPQ84yw0weMjhhr8AGK7Jc-A',
+    appId: '1:955168211941:android:fd98743c8ad2eeb7b2e50c',
+    messagingSenderId: '955168211941',
+    projectId: 'universty-app-shabaan',
+    storageBucket: 'universty-app-shabaan.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCayNMEC-kTHm8tK90soGeKQHDoSCp2Sn4',
-    appId: '1:1086690705290:ios:fe160f5e1acae24f251273',
-    messagingSenderId: '1086690705290',
-    projectId: 'big-lore-386620',
-    storageBucket: 'big-lore-386620.appspot.com',
+    apiKey: 'AIzaSyA89pPnNZjjJLk83hoA9OwMKeL-Cb4VhYw',
+    appId: '1:955168211941:ios:5ac7974506e04891b2e50c',
+    messagingSenderId: '955168211941',
+    projectId: 'universty-app-shabaan',
+    storageBucket: 'universty-app-shabaan.appspot.com',
     iosBundleId: 'com.example.university',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCayNMEC-kTHm8tK90soGeKQHDoSCp2Sn4',
-    appId: '1:1086690705290:ios:ed2da3bc103550fe251273',
-    messagingSenderId: '1086690705290',
-    projectId: 'big-lore-386620',
-    storageBucket: 'big-lore-386620.appspot.com',
+    apiKey: 'AIzaSyA89pPnNZjjJLk83hoA9OwMKeL-Cb4VhYw',
+    appId: '1:955168211941:ios:64e38ca34ef333a9b2e50c',
+    messagingSenderId: '955168211941',
+    projectId: 'universty-app-shabaan',
+    storageBucket: 'universty-app-shabaan.appspot.com',
     iosBundleId: 'com.example.university.RunnerTests',
   );
 }

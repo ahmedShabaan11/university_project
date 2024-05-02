@@ -4,7 +4,7 @@ import 'package:university/componenets/custom_button.dart';
 import 'package:university/componenets/custom_text_formfeild.dart';
 import 'package:university/constants.dart';
 import 'package:university/core/regex_manager.dart';
-import 'package:university/screens/home_screen/home_screen.dart';
+import 'package:university/screens/home_screen/student_home_screen.dart';
 import 'package:university/screens/signup_screen/sign_up.dart';
 
 late bool _passwordVisible;
@@ -31,8 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
             email: _emailController.text.trim(),
             password: _passwordController.text.trim())
             .then((value) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          Navigator.pushReplacementNamed(
+              context, FirebaseAuth.instance.currentUser!.photoURL!);
         });
       }
     } on FirebaseAuthException catch (e) {
