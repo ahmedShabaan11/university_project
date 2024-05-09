@@ -11,61 +11,64 @@ import 'package:university/data/models/user.dart';
 
 class ChatScreen extends StatelessWidget {
   ChatScreen({super.key});
-  static String chatScreen="chatScreen";
+
+  static String chatScreen = "chatScreen";
+
   @override
   Widget build(BuildContext context) {
-    MessageFirebase messageFirebase=MessageFirebase();
+    MessageFirebase messageFirebase = MessageFirebase();
     String chatId = ModalRoute.of(context)!.settings.arguments as String;
     final controller = TextEditingController();
     return Scaffold(
       backgroundColor: kOtherColor,
-      body: Column(
-        children: [
-          Expanded(
-            child: StreamBuilder<QuerySnapshot<MessageModel>>(
-                stream: messageFirebase.getAllPrivateMessage(chatId),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<MessageModel> messagesList =
-                        snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
-                    return ListView.builder(
-                                        reverse: true,
-                                        controller: messageFirebase.listViewController,
-                                        itemCount: messagesList.length,
-                                        itemBuilder: (context, index) {
-                    if (FirebaseAuth.instance.currentUser!.uid ==
-                        messagesList[index].uid) {
-                      return Caht_Bubble(
-                        message: messagesList[index],
-                      );
-                    }
-                    return Caht_Bubble_re(
-                      message: messagesList[index],
-                    );
-                                        },
-                                      );
-                  }else{
-                    return const Center(child: Text('loading..'));
-                  }
-                }),
-          ),
-          TextFormField(
-            controller: controller,
-            decoration: InputDecoration(
-                suffixIcon: InkWell(
-                        child: Icon(Icons.send),
-                        onTap: () async {
-                          await MessageFirebase()
-                              .addPrivateMessage(chatId, controller.text);
-                        },
-                      ),
-                hintText: "Type ...",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                )),
-          )
-        ],
-      ),
+      body: StreamBuilder<QuerySnapshot<MessageModel>>(
+          stream: messageFirebase.getAllPrivateMessage(chatId),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<MessageModel> messagesList =
+                  snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      reverse: true,
+                      controller: messageFirebase.listViewController,
+                      itemCount: messagesList.length,
+                      itemBuilder: (context, index) {
+                        if (FirebaseAuth.instance.currentUser!.uid ==
+                            messagesList[index].uid) {
+                          return Caht_Bubble(
+                            message: messagesList[index],
+                          );
+                        }
+                        return Caht_Bubble_re(
+                          message: messagesList[index],
+                        );
+                      },
+                    ),
+                  ),
+                  TextFormField(
+                    controller: controller,
+                    decoration: InputDecoration(
+                        suffixIcon: InkWell(
+                          child: Icon(Icons.send),
+                          onTap: () async {
+                            await messageFirebase
+                                .addPrivateMessage(chatId, controller.text);
+                            controller.clear();
+                          },
+                        ),
+                        hintText: "Type ...",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        )),
+                  ),
+                ],
+              );
+            } else {
+              return const Center(child: Text('loading..'));
+            }
+          }),
     );
   }
 }

@@ -27,16 +27,17 @@ class _FirstChatScreenState extends State<FirstChatScreen> {
     final controller = TextEditingController();
     return Scaffold(
       backgroundColor: kOtherColor,
-      body: Column(
-        children: [
-          Expanded(
-            child: StreamBuilder<QuerySnapshot<MessageModel>>(
-                stream: messageFirebase.getAllPrivateMessage(chatId),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<MessageModel> messagesList =
-                        snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
-                    return ListView.builder(
+      body: StreamBuilder<QuerySnapshot<MessageModel>>(
+          stream: messageFirebase.getAllPrivateMessage(chatId),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<MessageModel> messagesList =
+                  snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
+              return
+                Column(
+                  children: [
+                    Expanded(
+                    child: ListView.builder(
                                         reverse: true,
                                         controller: messageFirebase.listViewController,
                                         itemCount: messagesList.length,
@@ -51,41 +52,43 @@ class _FirstChatScreenState extends State<FirstChatScreen> {
                       message: messagesList[index],
                     );
                                         },
-                                      );
-                  } else {
-                    return const Center(child: Text('loading..'));
-                  }
-                }),
-          ),
-          TextFormField(
-            controller: controller,
-            decoration: InputDecoration(
-                suffixIcon: chatId.isEmpty
-                    ? InkWell(
-                        child: Icon(Icons.send),
-                        onTap: () async {
-                          await PrivateChatFirebase()
-                              .createPrivateChat(userModel, controller.text);
-                          // chatId = await PrivateChatFirebase()
-                          //     .getLastPrivateChatId()
-                          //     .id;
-                          setState(() {});
-                        },
-                      )
-                    : InkWell(
-                        child: Icon(Icons.send),
-                        onTap: () async {
-                          await MessageFirebase()
-                              .addPrivateMessage(chatId, controller.text);
-                        },
-                      ),
-                hintText: "Type ...",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                )),
-          )
-        ],
-      ),
+                                      ),
+                                  ),
+                    TextFormField(
+                      controller: controller,
+                      decoration: InputDecoration(
+                          suffixIcon: chatId.isEmpty
+                              ? InkWell(
+                            child: Icon(Icons.send),
+                            onTap: () async {
+                              await PrivateChatFirebase()
+                                  .createPrivateChat(userModel, controller.text);
+                              // chatId = await PrivateChatFirebase()
+                              //     .getLastPrivateChatId()
+                              //     .id;
+                              controller.clear();
+                            },
+                          )
+                              : InkWell(
+                            child: Icon(Icons.send),
+                            onTap: () async {
+                              await messageFirebase
+                                  .addPrivateMessage(chatId, controller.text);
+                              controller.clear();
+                            },
+                          ),
+                          hintText: "Type ...",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          )),
+                    )
+
+                  ],
+                );
+            } else {
+              return const Center(child: Text('loading..'));
+            }
+          }),
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:university/core/key_manager.dart';
 import 'package:university/data/firebase/user_firebase.dart';
 
@@ -10,6 +12,7 @@ class UserModel {
   String phone;
   String email;
   String type;
+  List<UserModel> connections;
 
   UserModel(
       { this.uid,
@@ -18,7 +21,7 @@ class UserModel {
       required this.firstName,
       required this.lastName,
        this.idStu,
-      required this.password,required this.type});
+      required this.password,required this.type,required this.connections});
 
   factory UserModel.fromJsonU(Map<String, dynamic> jsonData) {
     return UserModel(
@@ -29,7 +32,8 @@ class UserModel {
       lastName: jsonData[JsonKeyManager.lastName],
       idStu: jsonData[JsonKeyManager.idStu],
       password: jsonData[JsonKeyManager.password],
-      type: jsonData[JsonKeyManager.type]
+      type: jsonData[JsonKeyManager.type],
+      connections: List.from((JsonKeyManager.connections as List<String>).map((e) => jsonDecode(e))),
     );
   }
 
@@ -43,6 +47,7 @@ class UserModel {
       JsonKeyManager.phone: phone,
       JsonKeyManager.uid: uid,
       JsonKeyManager.type: type,
+      JsonKeyManager.connections:connections,
     };
   }
 }
