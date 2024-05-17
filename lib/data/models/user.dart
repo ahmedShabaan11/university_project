@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:university/core/key_manager.dart';
-import 'package:university/data/firebase/user_firebase.dart';
 
 class UserModel {
   String firstName;
@@ -14,16 +14,17 @@ class UserModel {
   String type;
   List<UserModel> connections;
 
-  UserModel(
-      { this.uid,
-      required this.email,
-      required this.phone,
-      required this.firstName,
-      required this.lastName,
-       this.idStu,
-      required this.password,required this.type,required this.connections});
+  UserModel({this.uid,
+    required this.email,
+    required this.phone,
+    required this.firstName,
+    required this.lastName,
+    this.idStu,
+    required this.password,
+    required this.type,
+   required this.connections});
 
-  factory UserModel.fromJsonU(Map<String, dynamic> jsonData) {
+  factory UserModel.fromJson(Map<String, dynamic> jsonData) {
     return UserModel(
       uid: jsonData[JsonKeyManager.uid],
       email: jsonData[JsonKeyManager.email],
@@ -33,11 +34,13 @@ class UserModel {
       idStu: jsonData[JsonKeyManager.idStu],
       password: jsonData[JsonKeyManager.password],
       type: jsonData[JsonKeyManager.type],
-      connections: List.from((JsonKeyManager.connections as List<String>).map((e) => jsonDecode(e))),
+      connections:List<UserModel>.from(
+          (jsonDecode(jsonData[JsonKeyManager.connections]))
+              .map((e) => UserModel.fromJson(e))),
     );
   }
 
-  Map<String, dynamic> toJsonU() {
+  Map<String, dynamic> toJson() {
     return {
       JsonKeyManager.email: email,
       JsonKeyManager.idStu: idStu,
@@ -47,7 +50,9 @@ class UserModel {
       JsonKeyManager.phone: phone,
       JsonKeyManager.uid: uid,
       JsonKeyManager.type: type,
-      JsonKeyManager.connections:connections,
+      JsonKeyManager.connections:jsonEncode(List<UserModel>.from(connections).map((e) => e.toJson()).toList()),
+      // connections.map((model) => model.toJson()).toList(),
     };
   }
 }
+

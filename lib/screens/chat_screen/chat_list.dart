@@ -28,7 +28,7 @@ class _ChatListState extends State<ChatList> {
     isSearch = !isSearch;
     setState(() {});
   }
-  PrivateChatFirebase privateChatFirebase=PrivateChatFirebase();
+  UserFirebase userFirebase=UserFirebase();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,23 +54,19 @@ class _ChatListState extends State<ChatList> {
           Expanded(
               child:
 
-              StreamBuilder<QuerySnapshot<PrivateChatModel>>(
-                  stream:privateChatFirebase.getAllPrivateChat(),
+              StreamBuilder<QuerySnapshot<UserModel>>(
+                  stream:userFirebase.getUser(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      List<PrivateChatModel> privateChatList = snapshot.data
-                          ?.docs
-                          .map((e) => e.data()).toList() ?? [];
+                      UserModel? userModel = snapshot.data!.docs.first.data();
                       return ListView.builder(
-                          itemCount: privateChatList.length,
+                          itemCount: userModel.connections.length,
                           itemBuilder: (context, index) {
-                            if(privateChatList[index].from==FirebaseAuth.instance.currentUser!.uid||privateChatList[index].to==FirebaseAuth.instance.currentUser!.uid){
-                              return ChatItem(title: privateChatList[index].name,
-                                type: privateChatList[index].type,onTap: (){
-                                  Navigator.pushNamed(context, ChatScreen.chatScreen,arguments: privateChatList[index].id);
+                              return ChatItem(title: "${userModel.connections[index].firstName} ${userModel.connections[index].lastName}",
+                                type: userModel.connections[index].type,onTap: (){
+                                  Navigator.pushNamed(context, ChatScreen.chatScreen,arguments: [userModel,userModel.connections[index]]);
                                 },);
-                            }
-                            return Container();
+
                           });
                     } else {
                       return const Center(child: Text('loading..'));

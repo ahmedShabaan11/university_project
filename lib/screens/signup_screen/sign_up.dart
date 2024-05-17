@@ -44,16 +44,26 @@ class _SignUpState extends State<SignUp> {
           lastName: _lastName.text.trim(),
           password: _passwordController.text.trim(),
           type: "",
-          connections: []
+          connections: [UserModel(
+              email: _emailController.text.trim(),
+              phone: _phone.text.trim(),
+              firstName: _firstName.text.trim(),
+              lastName: _lastName.text.trim(),
+              password: _passwordController.text.trim(),
+              type: "",
+              connections: []
+          )]
         );
+
         FirebaseAuth.instance.currentUser
             ?.updateDisplayName(_firstName.text+" "+_lastName.text);
         FirebaseAuth.instance.currentUser
-            ?.updatePhotoURL(StudentHomeScreen.studentHome).then((value) {
+            ?.updatePhotoURL(StudentHomeScreen.studentHome).then((value) async{
               userModel.type=StudentHomeScreen.studentHome;
-          UserFirebase().addUser(userModel);
-          Navigator.pushReplacementNamed(
-              context, LoginScreen.routeName);
+           await UserFirebase().addUser(userModel).then((v){
+             Navigator.pushReplacementNamed(
+                 context, LoginScreen.routeName);
+           });
         });
 
 

@@ -24,7 +24,7 @@ class MyProfileScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CollectionReference Users = FirebaseFirestore.instance.collection('Users');
-    UserFirebase().getUser().then(
+    UserFirebase().getProfile().then(
       (value) {
         userModel = value.docs.first.data();
       },

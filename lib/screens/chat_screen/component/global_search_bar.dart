@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:university/core/key_manager.dart';
 import 'package:university/data/firebase/user_firebase.dart';
 import 'package:university/data/models/user.dart';
 import 'package:university/screens/chat_screen/chat_screen.dart';
@@ -19,11 +20,16 @@ class GlobalSearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<GlobalSearchBar> {
   String value = "";
+  UserModel? userModel;
 
   @override
   Widget build(BuildContext context) {
     UserFirebase userFirebase = UserFirebase();
-
+    userFirebase.getProfile().then(
+      (value) {
+        userModel = value.docs.first.data();
+      },
+    );
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Column(
@@ -43,7 +49,7 @@ class _SearchBarState extends State<GlobalSearchBar> {
                   child: Icon(Icons.close),
                 )),
           ),
-          StreamBuilder<QuerySnapshot<UserModel>>(
+          StreamBuilder(
               stream: FirebaseAuth.instance.currentUser!.photoURL ==
                       StudentHomeScreen.studentHome
                   ? userFirebase.getAllUsers()
@@ -54,40 +60,18 @@ class _SearchBarState extends State<GlobalSearchBar> {
                       snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
                   return Expanded(
                       child: ListView.builder(
-                          itemCount: usersList.length,
-                          itemBuilder: (context, index) {
-                            if ("${usersList[index].firstName} ${usersList[index].lastName}"
-                                    .contains(value) ||
-                                usersList[index].phone.contains(value) ||
-                                usersList[index].email.contains(value)) {
-                              return ChatItem(
-                                title:
-                                    "${usersList[index].firstName} ${usersList[index].lastName}",
-                                type: usersList[index].type,
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, FirstChatScreen.firstChatScreen,
-                                      arguments: usersList[index]);
-                                },
-                              );
-                            }
-                            if (value.isEmpty) {
-                              return ChatItem(
-                                title:
-                                "${usersList[index].firstName} ${usersList[index].lastName}",
-                                type: usersList[index].type,
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, FirstChatScreen.firstChatScreen,
-                                      arguments: usersList[index]);
-                                },
-                              );
-                            }
-                            return Container();
-                          }));
-                } else {
-                  return const Center(child: Text('loading..'));
+                    itemCount: usersList.length,
+                    itemBuilder: (context, index) {
+                      return ChatItem(
+                          title:
+                              "${usersList[index].firstName} ${usersList[index].lastName}",
+                          type: usersList[index].type);
+                    },
+                  ));
                 }
+                return Center(
+                  child: Text("Loading..."),
+                );
               })
         ],
       ),

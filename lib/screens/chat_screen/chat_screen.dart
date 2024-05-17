@@ -17,12 +17,12 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MessageFirebase messageFirebase = MessageFirebase();
-    String chatId = ModalRoute.of(context)!.settings.arguments as String;
+    List<UserModel> users = ModalRoute.of(context)!.settings.arguments as List<UserModel>;
     final controller = TextEditingController();
     return Scaffold(
       backgroundColor: kOtherColor,
       body: StreamBuilder<QuerySnapshot<MessageModel>>(
-          stream: messageFirebase.getAllPrivateMessage(chatId),
+          stream: messageFirebase.getAllMessage(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               List<MessageModel> messagesList =
@@ -48,13 +48,13 @@ class ChatScreen extends StatelessWidget {
                     ),
                   ),
                   TextFormField(
-                    controller: controller,
+                    controller: messageFirebase.messageController,
                     decoration: InputDecoration(
                         suffixIcon: InkWell(
                           child: Icon(Icons.send),
                           onTap: () async {
                             await messageFirebase
-                                .addPrivateMessage(chatId, controller.text);
+                                .addMessage();
                             controller.clear();
                           },
                         ),
