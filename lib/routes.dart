@@ -25,5 +25,5 @@ Map<String, WidgetBuilder> routes = {
    MyProfileScreens.routeName: (context) =>  MyProfileScreens(),
    ChatList.chatList: (context) =>  ChatList(),
    ChatScreen.chatScreen: (context) =>  ChatScreen(),
-   FirstChatScreen.firstChatScreen: (context) =>  FirstChatScreen(),
+   // FirstChatScreen.firstChatScreen: (context) =>  FirstChatScreen(),
 };

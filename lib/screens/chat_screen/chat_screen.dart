@@ -5,6 +5,7 @@ import 'package:university/componenets/chat_bubble_model.dart';
 import 'package:university/constants.dart';
 import 'package:university/data/firebase/message_firebase.dart';
 import 'package:university/data/firebase/private_chat_firebase.dart';
+import 'package:university/data/firebase/user_firebase.dart';
 import 'package:university/data/models/messages.dart';
 import 'package:university/data/models/private_chat_model.dart';
 import 'package:university/data/models/user.dart';
@@ -17,7 +18,8 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MessageFirebase messageFirebase = MessageFirebase();
-    List<UserModel> users = ModalRoute.of(context)!.settings.arguments as List<UserModel>;
+    List<UserModel> users =
+        ModalRoute.of(context)!.settings.arguments as List<UserModel>;
     final controller = TextEditingController();
     return Scaffold(
       backgroundColor: kOtherColor,
@@ -25,8 +27,20 @@ class ChatScreen extends StatelessWidget {
           stream: messageFirebase.getAllMessage(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              List<MessageModel> messagesList =
-                  snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
+              List<MessageModel> messagesList = snapshot.data?.docs
+                      .where((element) =>
+                          element
+                              .data()
+                              .chatId!
+                              .contains("${users[0].uid}${users[1].uid}") ||
+                          element
+                              .data()
+                              .chatId!
+                              .contains("${users[1].uid}${users[0].uid}"))
+                      .map((e) {
+                    return e.data();
+                  }).toList() ??
+                  [];
               return Column(
                 children: [
                   Expanded(
@@ -53,8 +67,11 @@ class ChatScreen extends StatelessWidget {
                         suffixIcon: InkWell(
                           child: Icon(Icons.send),
                           onTap: () async {
-                            await messageFirebase
-                                .addMessage();
+                            if (messagesList.isEmpty) {
+                              UserFirebase().newConnection(users[0], users[1]);
+                            }
+                            await messageFirebase.addPrivateMessage(
+                                "${users[0].uid}${users[1].uid}");
                             controller.clear();
                           },
                         ),

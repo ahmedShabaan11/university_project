@@ -43,21 +43,20 @@ class MessageFirebase {
         .snapshots();
   }
 
-  Stream<QuerySnapshot<MessageModel>> getAllPrivateMessage(String chatId) {
-    return messageRef
-        .orderBy(JsonKeyManager.createdAt, descending: true)
-        .where(JsonKeyManager.chatId, isEqualTo: chatId)
+  Stream<QuerySnapshot<MessageModel>> getAllPrivateMessage() {
+    return messageRef.
+        orderBy(JsonKeyManager.createdAt, descending: true)
         .snapshots();
   }
 
-  addPrivateMessage(String chatId,String text) async {
+  addPrivateMessage(String chatId) async {
     try {
       final doc = messageRef.doc();
       MessageModel message = MessageModel(
           name: FirebaseAuth.instance.currentUser!.displayName!,
           id: doc.id,
           uid: FirebaseAuth.instance.currentUser!.uid,
-          message:text.trim(),
+          message:messageController.text,
           chatId: chatId);
 
       await doc.set(message).then((value) {

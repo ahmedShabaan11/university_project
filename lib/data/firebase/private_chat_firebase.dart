@@ -15,20 +15,20 @@ class PrivateChatFirebase {
               PrivateChatModel.fromJson(snapshot.data()!),
           toFirestore: (privateChat, _) => privateChat.toJson());
 
-  createPrivateChat(UserModel to, String message) async {
-    final doc = privateChatRef.doc();
-    await doc
-        .set(PrivateChatModel(
-      id: doc.id,
-      from: FirebaseAuth.instance.currentUser!.uid,
-      to: to.uid!,
-      name: "${to.firstName} ${to.lastName}",
-      type: to.type,
-    ))
-        .then((value) {
-      MessageFirebase().addPrivateMessage(doc.id, message);
-    });
-  }
+  // createPrivateChat(UserModel to, String message) async {
+  //   final doc = privateChatRef.doc();
+  //   await doc
+  //       .set(PrivateChatModel(
+  //     id: doc.id,
+  //     from: FirebaseAuth.instance.currentUser!.uid,
+  //     to: to.uid!,
+  //     name: "${to.firstName} ${to.lastName}",
+  //     type: to.type,
+  //   ))
+  //       .then((value) {
+  //     MessageFirebase().addPrivateMessage(doc.id, message);
+  //   });
+  // }
 
   Future<String?> getLastPrivateChatId() async{
     String? chatId;

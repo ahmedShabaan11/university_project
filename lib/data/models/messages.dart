@@ -12,7 +12,7 @@ class MessageModel {
       required this.name,
       required this.uid,
       required this.message,
-      this.chatId});
+      this.chatId,});
 
   factory MessageModel.fromJson(Map<String, dynamic> jsonData) {
     return MessageModel(
@@ -20,7 +20,7 @@ class MessageModel {
         uid: jsonData[JsonKeyManager.uid],
         message: jsonData[JsonKeyManager.message],
         id: jsonData[JsonKeyManager.id],
-        chatId: jsonData[JsonKeyManager.chatId]);
+        chatId: jsonData[JsonKeyManager.chatId],);
   }
 
   Map<String, dynamic> toJson() {

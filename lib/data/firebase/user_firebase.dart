@@ -55,13 +55,10 @@ class UserFirebase {
     from.connections.add(
       to,
     );
-    to.connections.add(from,);
-    userRef.doc(to.idStu).update(
-        {
-     JsonKeyManager.connections: FieldValue.arrayUnion(to.connections.map((e) => e.toJson()).toList())
-    });
-    userRef.doc(from.idStu).update({
-      JsonKeyManager.connections: FieldValue.arrayUnion(from.connections.map((e) => e.toJson()).toList())
-    });
+    to.connections.add(
+      from,
+    );
+    userRef.doc(to.idStu).update(to.toJson());
+    userRef.doc(from.idStu).update(from.toJson());
   }
 }
