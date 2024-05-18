@@ -14,15 +14,16 @@ class UserModel {
   String type;
   List<UserModel> connections;
 
-  UserModel({this.uid,
-    required this.email,
-    required this.phone,
-    required this.firstName,
-    required this.lastName,
-    this.idStu,
-    required this.password,
-    required this.type,
-   required this.connections});
+  UserModel(
+      {this.uid,
+      required this.email,
+      required this.phone,
+      required this.firstName,
+      required this.lastName,
+      this.idStu,
+      this.password = "",
+      required this.type,
+      required this.connections});
 
   factory UserModel.fromJson(Map<String, dynamic> jsonData) {
     return UserModel(
@@ -34,9 +35,9 @@ class UserModel {
       idStu: jsonData[JsonKeyManager.idStu],
       password: jsonData[JsonKeyManager.password],
       type: jsonData[JsonKeyManager.type],
-      connections:List<UserModel>.from(
+      connections: List<UserModel>.from(
           (jsonDecode(jsonData[JsonKeyManager.connections]))
-              .map((e) => UserModel.fromJson(e))),
+              .map((e) => UserModel.fromJson(e))).toList(),
     );
   }
 
@@ -50,9 +51,11 @@ class UserModel {
       JsonKeyManager.phone: phone,
       JsonKeyManager.uid: uid,
       JsonKeyManager.type: type,
-      JsonKeyManager.connections:jsonEncode(List<UserModel>.from(connections).map((e) => e.toJson()).toList()),
+      JsonKeyManager.connections: jsonEncode(
+          List<UserModel>.from(connections ?? [])
+              .map((e) => e.toJson())
+              .toList()),
       // connections.map((model) => model.toJson()).toList(),
     };
   }
 }
-

@@ -28,7 +28,9 @@ class _ChatListState extends State<ChatList> {
     isSearch = !isSearch;
     setState(() {});
   }
-  UserFirebase userFirebase=UserFirebase();
+
+  UserFirebase userFirebase = UserFirebase();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,43 +40,57 @@ class _ChatListState extends State<ChatList> {
       backgroundColor: kOtherColor,
       body: isSearch
           ? GlobalSearchBar(
-        isVisible: isVisible,
-      )
+              isVisible: isVisible,
+            )
           : Column(
-        children: [
-          InkWell(
-            onTap: isVisible,
-            child: Icon(Icons.search),
-          ),
-          if (FirebaseAuth.instance.currentUser!.photoURL ==
-              StudentHomeScreen.studentHome)
-            ChatItem(title: "Student Group", type: "", onTap: () {
-              Navigator.pushNamed(context, GroupChat_Screen.id);
-            },),
-          Expanded(
-              child:
-
-              StreamBuilder<QuerySnapshot<UserModel>>(
-                  stream:userFirebase.getUser(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      UserModel? userModel = snapshot.data!.docs.first.data();
-                      return ListView.builder(
-                          itemCount: userModel.connections.length,
-                          itemBuilder: (context, index) {
-                              return ChatItem(title: "${userModel.connections[index].firstName} ${userModel.connections[index].lastName}",
-                                type: userModel.connections[index].type,onTap: (){
-                                  Navigator.pushNamed(context, ChatScreen.chatScreen,arguments: [userModel,userModel.connections[index]]);
-                                },);
-
-                          });
-                    } else {
-                      return const Center(child: Text('loading..'));
-                    }
-                  })
-          )
-        ],
-      ),
+              children: [
+                InkWell(
+                  onTap: isVisible,
+                  child: Row(
+                    children: [
+                      Icon(Icons.search),
+                    ],
+                  ),
+                ),
+                if (FirebaseAuth.instance.currentUser!.photoURL ==
+                    StudentHomeScreen.studentHome)
+                  ChatItem(
+                    title: "Student Group",
+                    type: "",
+                    onTap: () {
+                      Navigator.pushNamed(context, GroupChat_Screen.id);
+                    },
+                  ),
+                Expanded(
+                    child: StreamBuilder<QuerySnapshot<UserModel>>(
+                        stream: userFirebase.getUser(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            UserModel userModel =
+                                snapshot.data!.docs.first.data();
+                            return ListView.builder(
+                                itemCount: userModel.connections.length,
+                                itemBuilder: (context, index) {
+                                  return ChatItem(
+                                    title:
+                                        "${userModel.connections[index].firstName} ${userModel.connections[index].lastName}",
+                                    type: userModel.connections[index].type,
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, ChatScreen.chatScreen,
+                                          arguments: [
+                                            userModel,
+                                            userModel.connections[index]
+                                          ]);
+                                    },
+                                  );
+                                });
+                          } else {
+                            return const Center(child: Text('loading..'));
+                          }
+                        }))
+              ],
+            ),
     );
   }
 }

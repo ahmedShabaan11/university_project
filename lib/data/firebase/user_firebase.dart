@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:university/core/key_manager.dart';
@@ -52,13 +54,25 @@ class UserFirebase {
   }
 
   newConnection(UserModel from, UserModel to) {
-    from.connections.add(
-      to,
-    );
-    to.connections.add(
-      from,
-    );
-    userRef.doc(to.idStu).update(to.toJson());
-    userRef.doc(from.idStu).update(from.toJson());
+    try {
+      UserModel userModel=to;
+      List<UserModel> toUser=[];
+      List<UserModel> fromUser=[];
+      to.connections.forEach((element) {
+        toUser.add(element);
+      });
+      toUser.add(from);
+      from.connections.forEach(
+              (element){
+        fromUser.add(element);
+      });
+      fromUser.add(to);
+      from.connections.forEach((element) {print(element.email);});
+      to.connections.forEach((element) {print(element.email);});
+      userRef.doc(to.idStu).update({JsonKeyManager.connections:jsonEncode(List<UserModel>.from(toUser).map((e) => e.toJson()).toList())});
+      userRef.doc(from.idStu).update({JsonKeyManager.connections:jsonEncode(List<UserModel>.from(fromUser).map((e) => e.toJson()).toList())});
+    } on Exception catch (e) {
+      print(e.toString()+" ********* ");
+    }
   }
 }

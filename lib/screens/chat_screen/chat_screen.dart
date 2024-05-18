@@ -18,8 +18,8 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MessageFirebase messageFirebase = MessageFirebase();
-    List<UserModel> users =
-        ModalRoute.of(context)!.settings.arguments as List<UserModel>;
+    final users =
+        ModalRoute.of(context)!.settings.arguments as List<UserModel?>;
     final controller = TextEditingController();
     return Scaffold(
       backgroundColor: kOtherColor,
@@ -27,16 +27,16 @@ class ChatScreen extends StatelessWidget {
           stream: messageFirebase.getAllMessage(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              List<MessageModel> messagesList = snapshot.data?.docs
+              List<MessageModel> messagesList = snapshot.data?.docs.where((element) => element.data().chatId!=null)
                       .where((element) =>
                           element
                               .data()
                               .chatId!
-                              .contains("${users[0].uid}${users[1].uid}") ||
+                              .contains("${users[0]!.uid}${users[1]!.uid}") ||
                           element
                               .data()
                               .chatId!
-                              .contains("${users[1].uid}${users[0].uid}"))
+                              .contains("${users[1]!.uid}${users[0]!.uid}"))
                       .map((e) {
                     return e.data();
                   }).toList() ??
@@ -68,10 +68,10 @@ class ChatScreen extends StatelessWidget {
                           child: Icon(Icons.send),
                           onTap: () async {
                             if (messagesList.isEmpty) {
-                              UserFirebase().newConnection(users[0], users[1]);
+                              UserFirebase().newConnection(users[0]!, users[1]!);
                             }
                             await messageFirebase.addPrivateMessage(
-                                "${users[0].uid}${users[1].uid}");
+                                "${users[0]!.uid}${users[1]!.uid}");
                             controller.clear();
                           },
                         ),

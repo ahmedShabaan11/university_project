@@ -77,10 +77,19 @@ class Caht_Bubble_re extends StatelessWidget {
                 topRight: Radius.circular(32),
                 bottomLeft: Radius.circular(32)),
             color: Colors.white),
-        child: Text(
-          message.message,
-          style:
-              const TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
+        child: Column(
+          children: [
+            Text(
+              message.name,
+              style:
+              TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+            ),
+            Text(
+              message.message,
+              style: const TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.w400),
+            ),
+          ],
         ),
       ),
     );

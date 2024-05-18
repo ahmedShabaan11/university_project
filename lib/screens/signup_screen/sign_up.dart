@@ -44,15 +44,7 @@ class _SignUpState extends State<SignUp> {
           lastName: _lastName.text.trim(),
           password: _passwordController.text.trim(),
           type: "",
-          connections: [UserModel(
-              email: _emailController.text.trim(),
-              phone: _phone.text.trim(),
-              firstName: _firstName.text.trim(),
-              lastName: _lastName.text.trim(),
-              password: _passwordController.text.trim(),
-              type: "",
-              connections: []
-          )]
+          connections: []
         );
 
         FirebaseAuth.instance.currentUser

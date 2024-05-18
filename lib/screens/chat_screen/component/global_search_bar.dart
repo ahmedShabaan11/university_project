@@ -62,21 +62,33 @@ class _SearchBarState extends State<GlobalSearchBar> {
                       child: ListView.builder(
                     itemCount: usersList.length,
                     itemBuilder: (context, index) {
-                      if("${usersList[index].firstName} ${usersList[index].lastName}".contains(value)||usersList[index].email.contains(value)||usersList[index].phone.contains(value)&&value!=""){
+                      // userFirebase.newConnection(usersList[0], usersList[1]);
+                      if ("${usersList[index].firstName} ${usersList[index].lastName}".toLowerCase()
+                              .contains(value.toLowerCase()) ||
+                          usersList[index].email.toLowerCase().contains(value.toLowerCase()) ||
+                          usersList[index].phone.contains(value)) {
                         return ChatItem(
-                            title:
-                            "${usersList[index].firstName} ${usersList[index].lastName}",
-                            type: usersList[index].type,onTap: (){
-                          Navigator.pushNamed(context, ChatScreen.chatScreen,arguments: [userModel,usersList[index]]);
-                        },);
-                      }else{
-                        return ChatItem(
-                            title:
-                            "${usersList[index].firstName} ${usersList[index].lastName}",
-                            type: usersList[index].type,onTap: (){
-                          Navigator.pushNamed(context, ChatScreen.chatScreen,arguments: [userModel,usersList[index]]);
-                        },);
+                          title:
+                              "${usersList[index].firstName} ${usersList[index].lastName}",
+                          type: usersList[index].type,
+                          onTap: () {
+                            Navigator.pushNamed(context, ChatScreen.chatScreen,
+                                arguments: [userModel, usersList[index]]);
+                          },
+                        );
                       }
+                      if (value.isEmpty) {
+                        return ChatItem(
+                          title:
+                              "${usersList[index].firstName} ${usersList[index].lastName}",
+                          type: usersList[index].type,
+                          onTap: () {
+                            Navigator.pushNamed(context, ChatScreen.chatScreen,
+                                arguments: [userModel, usersList[index]]);
+                          },
+                        );
+                      }
+                      return SizedBox();
                     },
                   ));
                 }

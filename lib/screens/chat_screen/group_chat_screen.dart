@@ -38,7 +38,7 @@ MessageFirebase messageFirebase=MessageFirebase();
           stream: messageFirebase.getAllMessage(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              List<MessageModel> messagesList = snapshot.data?.docs
+              List<MessageModel> messagesList = snapshot.data?.docs.where((element) => element.data().chatId==null)
 
                   .map((e) => e.data()).toList() ?? [];
              
