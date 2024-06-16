@@ -7,6 +7,7 @@ import 'package:university/core/regex_manager.dart';
 import 'package:university/data/firebase/user_firebase.dart';
 import 'package:university/data/models/user.dart';
 import 'package:university/screens/home_screen/admin_home_screen.dart';
+import 'package:university/screens/home_screen/prof_home_screen.dart';
 import 'package:university/screens/home_screen/student_home_screen.dart';
 import 'package:university/screens/loginscreen/login.dart';
 
@@ -50,8 +51,8 @@ class _SignUpState extends State<SignUp> {
         FirebaseAuth.instance.currentUser
             ?.updateDisplayName(_firstName.text+" "+_lastName.text);
         FirebaseAuth.instance.currentUser
-            ?.updatePhotoURL(StudentHomeScreen.studentHome).then((value) async{
-              userModel.type=StudentHomeScreen.studentHome;
+            ?.updatePhotoURL(ProfHomeScreen.profHome).then((value) async{
+              userModel.type=ProfHomeScreen.profHome;
            await UserFirebase().addUser(userModel).then((v){
              Navigator.pushReplacementNamed(
                  context, LoginScreen.routeName);

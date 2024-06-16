@@ -6,6 +6,7 @@ class JsonKeyManager{
  static const String email="email";
  static const String message="message";
  static const String date="date";
+ static const String doctor="doctor";
  static const String attendanceDate="attendanceDate";
  static const String createdAt="createdAt";
  static const String phone ="phone";
@@ -15,6 +16,9 @@ class JsonKeyManager{
  static const String type ="type";
  static const String from ="from";
  static const String to ="to";
+ static const String url ="url";
+ static const String start ="start";
+ static const String end ="end";
  static const String chatId="chatId";
  static const String connections="connections";
 

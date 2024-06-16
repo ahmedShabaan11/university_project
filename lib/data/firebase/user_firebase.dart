@@ -72,7 +72,7 @@ class UserFirebase {
       userRef.doc(to.idStu).update({JsonKeyManager.connections:jsonEncode(List<UserModel>.from(toUser).map((e) => e.toJson()).toList())});
       userRef.doc(from.idStu).update({JsonKeyManager.connections:jsonEncode(List<UserModel>.from(fromUser).map((e) => e.toJson()).toList())});
     } on Exception catch (e) {
-      print(e.toString()+" ********* ");
+      print(e.toString());
     }
   }
 }

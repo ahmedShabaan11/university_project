@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:university/componenets/button_home_model.dart';
+import 'package:university/data/firebase/meet_firebase.dart';
+import 'package:university/data/models/meet_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
 import '../screens/my_profile/my_profile.dart';
@@ -56,7 +60,7 @@ class StudentHomeComponents extends StatelessWidget {
                                     ),
                           ),
                           Text(
-                           FirebaseAuth.instance.currentUser!.displayName!,
+                            FirebaseAuth.instance.currentUser!.displayName!,
                             style:
                                 Theme.of(context).textTheme.subtitle1!.copyWith(
                                       fontWeight: FontWeight.w700,
@@ -183,6 +187,23 @@ class StudentHomeComponents extends StatelessWidget {
               )
             ],
           ),
+        ),
+        StreamBuilder<QuerySnapshot<MeetModel>>(
+          stream: MeetFirebase().getMeet(),
+          builder: (context, snapshot) {
+            if(snapshot.hasData){
+              return ElevatedButton(
+                onPressed: () async{
+                  if(!await launchUrl(Uri.parse(snapshot.data?.docs.first.data().url??""))){
+                    throw Exception('Could not launch url');
+                  }
+                },
+                child: Text("Go TO Meet"),
+              );
+            }
+            return SizedBox();
+
+          }
         ),
         Expanded(
           child: Container(
