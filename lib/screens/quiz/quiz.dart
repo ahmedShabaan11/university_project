@@ -5,15 +5,19 @@ import 'package:university/data/models/user.dart';
 import 'package:university/screens/quiz/component/question_widget.dart';
 
 class Quiz extends StatefulWidget {
-  const Quiz({super.key});
-  static String quiz="quiz";
+   Quiz({super.key});
+
+  int questionIndex = 0;
+  static String quiz = "quiz";
+
   @override
   State<Quiz> createState() => _QuizState();
 }
 
 class _QuizState extends State<Quiz> {
   UserModel? userModel;
-  List<int> selectedValue=[];
+  List<int> selectedValue = [];
+
   @override
   Widget build(BuildContext context) {
     UserFirebase().getProfile().then(
@@ -21,14 +25,21 @@ class _QuizState extends State<Quiz> {
         userModel = value.docs.first.data();
       },
     );
+    List<QuestionWidget> listQuestionWidget = [];
     final formKey = GlobalKey<FormState>();
-    int questionIndex = 0;
+
     QuizModel quizModel =
         ModalRoute.of(context)!.settings.arguments as QuizModel;
     List<TextEditingController> listOfAnswers = [];
-    for (var element in quizModel.questionList) {
+    for (int i = 0; i < quizModel.questionList.length; i++) {
       listOfAnswers.add(TextEditingController());
       selectedValue.add(-1);
+      listQuestionWidget.add(
+        QuestionWidget(
+          questionModel: quizModel.questionList[i],
+          selectedValue: selectedValue[i],
+        ),
+      );
     }
     return Scaffold(
       backgroundColor: Colors.white,
@@ -41,51 +52,27 @@ class _QuizState extends State<Quiz> {
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              Expanded(
-                child: ListView(
-                  children: [
-                    Text(quizModel.questionList[questionIndex].question),
-                    ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: quizModel.questionList[questionIndex].chooses.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              Radio(
-                                  value: index,
-                                  groupValue: selectedValue[questionIndex],
-                                  onChanged: (v){
-                                    selectedValue[questionIndex]=v!;
-                                    setState(() {
-
-                                    });
-                                  }),
-                                Text(quizModel.questionList[questionIndex].chooses[index].text)
-                            ],
-                          );
-                        }),
-                  ],
-                ),
-              ),
+              listQuestionWidget[ widget.questionIndex ],
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  questionIndex!=0?InkWell(
-                    onTap: () {
-                      if (questionIndex > 0) {
-                        questionIndex--;
-                        setState(() {});
-                      }
-                    },
-                    child: Column(
-                      children: [
-                        Icon(Icons.arrow_back_ios),
-                        Text("Back"),
-                      ],
-                    ),
-                  ):SizedBox(),
-                  listOfAnswers.length - 1 == questionIndex
+                 widget.questionIndex != 0
+                      ? InkWell(
+                          onTap: () {
+                            if (widget.questionIndex > 0) {
+                              widget.questionIndex--;
+                              setState(() {});
+                            }
+                          },
+                          child: Column(
+                            children: [
+                              Icon(Icons.arrow_back_ios),
+                              Text("Back"),
+                            ],
+                          ),
+                        )
+                      : SizedBox(),
+                  listOfAnswers.length - 1 == widget.questionIndex
                       ? InkWell(
                           onTap: () {
                             if (formKey.currentState!.validate()) {
@@ -95,15 +82,27 @@ class _QuizState extends State<Quiz> {
                                   doctor: quizModel.doctor,
                                   subject: quizModel.subject,
                                   questionList: []);
-                              for (int i=0 ; i<listOfAnswers.length;i++) {
+                              for (int i = 0; i < listOfAnswers.length; i++) {
                                 solveQuiz.questionList.add(
                                   QuestionModel(
                                       question:
-                                      quizModel.questionList[i].question,
+                                          quizModel.questionList[i].question,
                                       chooses: [
                                         Answer(
-                                          text: quizModel.questionList[questionIndex].chooses[selectedValue[questionIndex]].text,
-                                          isAnswer:quizModel.questionList[questionIndex].chooses[selectedValue[questionIndex]].isAnswer,
+                                          text:
+                                              listQuestionWidget[ widget.questionIndex ]
+                                                  .questionModel
+                                                  .chooses[listQuestionWidget[
+                                              widget.questionIndex ]
+                                                      .selectedValue]
+                                                  .text,
+                                          isAnswer:
+                                              listQuestionWidget[ widget.questionIndex ]
+                                                  .questionModel
+                                                  .chooses[listQuestionWidget[
+                                              widget.questionIndex ]
+                                                      .selectedValue]
+                                                  .isAnswer,
                                         ),
                                       ]),
                                 );
@@ -124,11 +123,10 @@ class _QuizState extends State<Quiz> {
                         )
                       : InkWell(
                           onTap: () {
-                            if (questionIndex < listOfAnswers.length - 1) {
-                              questionIndex++;
+                            if ( widget.questionIndex  < listOfAnswers.length - 1) {
+                              widget.questionIndex ++;
                             }
                             setState(() {});
-
                           },
                           child: Column(
                             children: [

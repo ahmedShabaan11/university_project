@@ -1,38 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:university/data/models/quiz_model.dart';
 
-class QuestionWidget extends StatelessWidget {
+class QuestionWidget extends StatefulWidget {
   QuestionWidget(
       {super.key,
       required this.questionModel,
-      required this.answer,
-      required this.onChanged});
+      this.selectedValue = -1,
+      this.onChanged});
 
+  int selectedValue;
   QuestionModel questionModel;
+
   TextEditingController answer = TextEditingController();
   void Function(Object?)? onChanged;
 
   @override
+  State<QuestionWidget> createState() => _QuestionWidgetState();
+}
+
+ class _QuestionWidgetState extends State<QuestionWidget> {
+  @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Text(questionModel.question),
-        ListView.builder(
+    return Expanded(
+      child: ListView(
+        children: [
+          Text(widget.questionModel.question),
+          ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: questionModel.chooses.length,
+            itemCount: widget.questionModel.chooses.length,
             itemBuilder: (context, index) {
               return Row(
                 children: [
                   Radio(
-                      value: questionModel.chooses[index].isAnswer,
-                      groupValue: answer.text,
-                      onChanged: onChanged),
-                  Text(questionModel.chooses[index].text)
+                      value: index,
+                      groupValue: widget.selectedValue,
+                      onChanged: (v) {
+                        widget.selectedValue = v!;
+                        setState(() {});
+                      }),
+                  Text(widget.questionModel.chooses[index].text)
                 ],
               );
-            }),
-      ],
+            },
+          ),
+        ],
+      ),
     );
   }
 }
