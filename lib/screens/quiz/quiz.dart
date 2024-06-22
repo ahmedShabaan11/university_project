@@ -13,7 +13,7 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   UserModel? userModel;
-
+  List<int> selectedValue=[];
   @override
   Widget build(BuildContext context) {
     UserFirebase().getProfile().then(
@@ -26,9 +26,10 @@ class _QuizState extends State<Quiz> {
     QuizModel quizModel =
         ModalRoute.of(context)!.settings.arguments as QuizModel;
     List<TextEditingController> listOfAnswers = [];
-    quizModel.questionList.forEach((element) {
+    for (var element in quizModel.questionList) {
       listOfAnswers.add(TextEditingController());
-    });
+      selectedValue.add(-1);
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -52,15 +53,15 @@ class _QuizState extends State<Quiz> {
                           return Row(
                             children: [
                               Radio(
-                                  value: quizModel.questionList[questionIndex].chooses[index].isAnswer,
-                                  groupValue: listOfAnswers[index].text,
+                                  value: index,
+                                  groupValue: selectedValue[questionIndex],
                                   onChanged: (v){
-                                    listOfAnswers[index].text=v.toString();
+                                    selectedValue[questionIndex]=v!;
                                     setState(() {
 
                                     });
                                   }),
-                              Text(quizModel.questionList[questionIndex].chooses[index].text)
+                                Text(quizModel.questionList[questionIndex].chooses[index].text)
                             ],
                           );
                         }),
@@ -101,9 +102,8 @@ class _QuizState extends State<Quiz> {
                                       quizModel.questionList[i].question,
                                       chooses: [
                                         Answer(
-                                          text: "",
-                                          isAnswer:
-                                          bool.parse(listOfAnswers[i].text),
+                                          text: quizModel.questionList[questionIndex].chooses[selectedValue[questionIndex]].text,
+                                          isAnswer:quizModel.questionList[questionIndex].chooses[selectedValue[questionIndex]].isAnswer,
                                         ),
                                       ]),
                                 );
@@ -113,6 +113,7 @@ class _QuizState extends State<Quiz> {
                               UserFirebase().solveNewQuiz(userModel!);
                             }
                             setState(() {});
+                            Navigator.pop(context);
                           },
                           child: Column(
                             children: [
@@ -125,8 +126,9 @@ class _QuizState extends State<Quiz> {
                           onTap: () {
                             if (questionIndex < listOfAnswers.length - 1) {
                               questionIndex++;
-                              setState(() {});
                             }
+                            setState(() {});
+
                           },
                           child: Column(
                             children: [

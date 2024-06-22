@@ -125,7 +125,7 @@ class StudentHomeComponents extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            'Attendance',
+                            'Degree',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2!
@@ -149,7 +149,7 @@ class StudentHomeComponents extends StatelessWidget {
                                     for (var element in element.questionList) {
                                       quizDegree+=questionDegree;
                                     }
-                                    userDegree+=quizDegree/(100*userModel.listOfQuizzes!.length)*100;
+                                    userDegree=(quizDegree/(100*userModel.listOfQuizzes!.length));
                                   }
                                   return userDegree;
                                 }
