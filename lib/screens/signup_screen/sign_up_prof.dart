@@ -44,7 +44,8 @@ class _SignUpState extends State<SignUpProf> {
           lastName: _lastName.text.trim(),
           password: _passwordController.text.trim(),
           type: "",
-          connections: []
+          connections: [],
+          listOfQuizzes: []
         );
         FirebaseAuth.instance.currentUser
             ?.updateDisplayName(_firstName.text+" "+_lastName.text);

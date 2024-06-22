@@ -23,41 +23,33 @@ class CustomTheme {
       elevation: 0,
     ),
     // input decoration theme for all our the app
-    inputDecorationTheme: InputDecorationTheme(
-      //label style for formField
-      // labelStyle: TextStyle(
-      //     fontSize: 11.sp, co lor: kTextLightColor, fontWeight: FontWeight.w400),
-      // //hint style
-      // hintStyle: TextStyle(fontSize: 16.0, color: kTextBlackColor, height: 0.5),
-      // //we are using underline input border
-      // //not outline
-    ),
-    textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-      //custom text for bodyText1
-      headline5: GoogleFonts.chewy(
-        color: kTextWhiteColor,
-        //condition if device is tablet or a phone
-        fontSize: SizerUtil.deviceType == DeviceType.tablet ? 45.sp : 40.sp,
-      ),
-      bodyText1: const TextStyle(
-          color: kTextWhiteColor, fontSize: 35.0, fontWeight: FontWeight.bold),
-      bodyText2: const TextStyle(
-        color: kTextWhiteColor,
-        fontSize: 28.0,
-      ),
-      subtitle1: TextStyle(
-          color: kTextWhiteColor,
-          fontSize: SizerUtil.deviceType == DeviceType.tablet ? 14.sp : 17.sp,
-          fontWeight: FontWeight.w700),
-      subtitle2: GoogleFonts.poppins(
-          color: kTextWhiteColor,
-          fontSize: SizerUtil.deviceType == DeviceType.tablet ? 12.sp : 13.sp,
-          fontWeight: FontWeight.w200),
-      caption: GoogleFonts.poppins(
-          color: kTextLightColor,
-          fontSize: SizerUtil.deviceType == DeviceType.tablet ? 5.sp : 7.sp,
-          fontWeight: FontWeight.w300),
-    ),
+
+    // textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+    //   //custom text for bodyText1
+    //   headline5: GoogleFonts.chewy(
+    //     color: kTextWhiteColor,
+    //     //condition if device is tablet or a phone
+    //     fontSize: SizerUtil.deviceType == DeviceType.tablet ? 45.sp : 40.sp,
+    //   ),
+    //   bodyText1: const TextStyle(
+    //       color: kTextWhiteColor, fontSize: 35.0, fontWeight: FontWeight.bold),
+    //   bodyText2: const TextStyle(
+    //     color: kTextWhiteColor,
+    //     fontSize: 28.0,
+    //   ),
+    //   subtitle1: TextStyle(
+    //       color: kTextWhiteColor,
+    //       fontSize: SizerUtil.deviceType == DeviceType.tablet ? 14.sp : 17.sp,
+    //       fontWeight: FontWeight.w700),
+    //   subtitle2: GoogleFonts.poppins(
+    //       color: kTextWhiteColor,
+    //       fontSize: SizerUtil.deviceType == DeviceType.tablet ? 12.sp : 13.sp,
+    //       fontWeight: FontWeight.w200),
+    //   caption: GoogleFonts.poppins(
+    //       color: kTextLightColor,
+    //       fontSize: SizerUtil.deviceType == DeviceType.tablet ? 5.sp : 7.sp,
+    //       fontWeight: FontWeight.w300),
+    // ),
   );
 }
 

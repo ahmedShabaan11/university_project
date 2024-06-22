@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:university/componenets/button_home_model.dart';
 import 'package:university/data/firebase/meet_firebase.dart';
+import 'package:university/data/firebase/user_firebase.dart';
 import 'package:university/data/models/meet_model.dart';
+import 'package:university/data/models/user.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
@@ -11,10 +13,11 @@ import '../screens/my_profile/my_profile.dart';
 import 'button_home.dart';
 
 class StudentHomeComponents extends StatelessWidget {
-  const StudentHomeComponents({super.key});
-
+   StudentHomeComponents({super.key});
   @override
   Widget build(BuildContext context) {
+    UserFirebase userFirebase=UserFirebase();
+
     return Column(
       children: [
 //we will divide the screen into two parts
@@ -131,15 +134,38 @@ class StudentHomeComponents extends StatelessWidget {
                                     color: kTextBlackColor,
                                     fontWeight: FontWeight.w800),
                           ),
-                          Text(
-                            '95.09%',
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle2!
-                                .copyWith(
-                                    fontSize: 25,
-                                    color: kTextBlackColor,
-                                    fontWeight: FontWeight.w300),
+                          StreamBuilder<QuerySnapshot<UserModel>>(
+                            stream: userFirebase.getUser(),
+                            builder: (context, snapshot) {
+                              if(snapshot.hasData){
+                                UserModel userModel =
+                                snapshot.data!.docs.first.data();
+                                double getDegree(){
+                                  double questionDegree;
+                                  double quizDegree=0;
+                                  double userDegree=0;
+                                  for (var element in userModel.listOfQuizzes!) {
+                                    questionDegree=100/element.questionList.length;
+                                    for (var element in element.questionList) {
+                                      quizDegree+=questionDegree;
+                                    }
+                                    userDegree+=quizDegree/(100*userModel.listOfQuizzes!.length)*100;
+                                  }
+                                  return userDegree;
+                                }
+                                return Text(
+                                  "${getDegree()}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle2!
+                                      .copyWith(
+                                      fontSize: 25,
+                                      color: kTextBlackColor,
+                                      fontWeight: FontWeight.w300),
+                                );
+                              }
+                              return Text("Degree");
+                            }
                           ),
                         ],
                       ),
@@ -192,14 +218,16 @@ class StudentHomeComponents extends StatelessWidget {
           stream: MeetFirebase().getMeet(),
           builder: (context, snapshot) {
             if(snapshot.hasData){
-              return ElevatedButton(
+              List<MeetModel> listOfMeet =
+                  snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
+              return listOfMeet.isNotEmpty?ElevatedButton(
                 onPressed: () async{
-                  if(!await launchUrl(Uri.parse(snapshot.data?.docs.first.data().url??""))){
+                  if(!await launchUrl(Uri.parse(listOfMeet.first.url??""))){
                     throw Exception('Could not launch url');
                   }
                 },
                 child: Text("Go TO Meet"),
-              );
+              ):SizedBox();
             }
             return SizedBox();
 

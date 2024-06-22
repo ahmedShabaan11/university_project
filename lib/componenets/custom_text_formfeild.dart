@@ -10,8 +10,10 @@ class CustomTextFormField extends StatelessWidget {
   TextInputType? keyboardType;
   Function(String)? onChange;
   String? Function(String?)? validator;
+  int? maxLines;
 
   CustomTextFormField({
+    this.maxLines=1,
     this.regexCondition,
     this.text,
     this.controller,
@@ -45,7 +47,7 @@ class CustomTextFormField extends StatelessWidget {
         enabled: enabled,
         controller: controller,
         obscureText: isPassword,
-        keyboardType: keyboardType,
+        keyboardType: keyboardType,maxLines:maxLines,
         decoration: InputDecoration(
           isDense: true,
           contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),

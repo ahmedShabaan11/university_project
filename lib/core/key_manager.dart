@@ -21,6 +21,14 @@ class JsonKeyManager{
  static const String end ="end";
  static const String chatId="chatId";
  static const String connections="connections";
+ static const String text="text";
+ static const String isAnswer="isAnswer";
+ static const String question="question";
+ static const String chooses="chooses";
+ static const String subject="subject";
+ static const String questionList="questionList";
+ static const String quizzes="quizzes";
+
 
 
 

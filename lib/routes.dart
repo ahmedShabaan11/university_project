@@ -13,6 +13,11 @@ import 'package:university/screens/meet/allmeet.dart';
 import 'package:university/screens/meet/component/meet_widget.dart';
 import 'package:university/screens/meet/my_meet.dart';
 import 'package:university/screens/my_profile/my_profile.dart';
+import 'package:university/screens/quiz/all_quizzes.dart';
+import 'package:university/screens/quiz/component/new_question_widget.dart';
+import 'package:university/screens/quiz/my_quizzes.dart';
+import 'package:university/screens/quiz/new_quiz_screen.dart';
+import 'package:university/screens/quiz/quiz.dart';
 import 'package:university/screens/signup_screen/sign_up_prof.dart';
 import 'package:university/screens/splash_screens/splash_screens.dart';
 
@@ -32,5 +37,10 @@ Map<String, WidgetBuilder> routes = {
   AddMeet.addMeet: (context) => AddMeet(),
   MyMeets.myMeets: (context) => MyMeets(),
   AllMeets.allMeets: (context) => AllMeets(),
+  NewQuizScreen.newQuizScreen: (context) => NewQuizScreen(),
+  NewQuestionWidget.newQuestionScreen: (context) => NewQuestionWidget(),
+  MyQuizzes.myQuizzes: (context) => MyQuizzes(),
+  AllQuizzes.allQuizzes: (context) => AllQuizzes(),
+  Quiz.quiz: (context) => Quiz(),
 // FirstChatScreen.firstChatScreen: (context) =>  FirstChatScreen(),
 };

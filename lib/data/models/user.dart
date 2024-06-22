@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:university/core/key_manager.dart';
+import 'package:university/data/models/quiz_model.dart';
 
 class UserModel {
   String firstName;
@@ -13,6 +14,7 @@ class UserModel {
   String email;
   String type;
   List<UserModel> connections;
+  List<QuizModel>? listOfQuizzes;
 
   UserModel(
       {this.uid,
@@ -23,7 +25,7 @@ class UserModel {
       this.idStu,
       this.password = "",
       required this.type,
-      required this.connections});
+      required this.connections,this.listOfQuizzes});
 
   factory UserModel.fromJson(Map<String, dynamic> jsonData) {
     return UserModel(
@@ -38,6 +40,9 @@ class UserModel {
       connections: List<UserModel>.from(
           (jsonDecode(jsonData[JsonKeyManager.connections]))
               .map((e) => UserModel.fromJson(e))).toList(),
+      listOfQuizzes: List<QuizModel>.from(
+          (jsonDecode(jsonData[JsonKeyManager.quizzes]))
+              .map((e) => QuizModel.fromJson(e))).toList(),
     );
   }
 
@@ -52,10 +57,12 @@ class UserModel {
       JsonKeyManager.uid: uid,
       JsonKeyManager.type: type,
       JsonKeyManager.connections: jsonEncode(
-          List<UserModel>.from(connections ?? [])
+          List<UserModel>.from(connections)
+              .map((e) => e.toJson())
+              .toList()),JsonKeyManager.quizzes: jsonEncode(
+          List<QuizModel>.from(listOfQuizzes ?? [])
               .map((e) => e.toJson())
               .toList()),
-      // connections.map((model) => model.toJson()).toList(),
     };
   }
 }

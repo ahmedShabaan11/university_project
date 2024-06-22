@@ -5,6 +5,9 @@ import 'package:university/screens/chat_screen/group_chat_screen.dart';
 import 'package:university/screens/meet/add_meet.dart';
 import 'package:university/screens/meet/allmeet.dart';
 import 'package:university/screens/meet/my_meet.dart';
+import 'package:university/screens/quiz/all_quizzes.dart';
+import 'package:university/screens/quiz/my_quizzes.dart';
+import 'package:university/screens/quiz/new_quiz_screen.dart';
 import 'package:university/screens/signup_screen/sign_up_prof.dart';
 
 class ButtonHomeModel {
@@ -18,9 +21,11 @@ class ButtonHomeModel {
 
 List<ButtonHomeModel> listStudentHomeButton = [
   ButtonHomeModel(
-    title: 'Assignments',
+    title: 'Quizzes',
     icon: Icons.assignment_add,
-    onTap: (context) {},
+    onTap: (context) {
+      Navigator.pushNamed(context, AllQuizzes.allQuizzes);
+    },
   ),
   ButtonHomeModel(
     title: 'Chat',
@@ -29,13 +34,15 @@ List<ButtonHomeModel> listStudentHomeButton = [
       Navigator.pushNamed(context, ChatList.chatList);
     },
   ),
-  ButtonHomeModel(
-      title: 'Courses', icon: Icons.data_array, onTap: (context) {}),
+  // ButtonHomeModel(
+  //     title: 'Courses', icon: Icons.data_array, onTap: (context) {}),
 ];
 
 List<ButtonHomeModel> listProHomeButton = [
   ButtonHomeModel(
-      title: 'new assignment', icon: Icons.assessment, onTap: (context) {}),
+      title: 'new assignment', icon: Icons.assessment, onTap: (context) {
+        Navigator.pushNamed(context, NewQuizScreen.newQuizScreen);
+  }),
   ButtonHomeModel(
       title: 'chat',
       icon: Icons.chat,
@@ -59,7 +66,9 @@ List<ButtonHomeModel> listProHomeButton = [
         Navigator.pushNamed(context, AllMeets.allMeets);
       }),
   ButtonHomeModel(
-      title: 'all assignments', icon: Icons.assessment, onTap: (context) {}),
+      title: 'My assignments', icon: Icons.assessment, onTap: (context) {
+        Navigator.pushNamed(context, MyQuizzes.myQuizzes);
+  }),
 ];
 
 List<ButtonHomeModel> listAdminHomeButton = [

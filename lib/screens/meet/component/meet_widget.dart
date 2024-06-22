@@ -16,6 +16,7 @@ class MeetWidget extends StatelessWidget {
       child: ListTile(
         title: Text(meetModel.doctor),
         subtitle: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
               onPressed: () async{

@@ -5,6 +5,10 @@ import 'package:sizer/sizer.dart';
 
 import 'package:university/constants.dart';
 import 'package:university/routes.dart';
+import 'package:university/screens/home_screen/admin_home_screen.dart';
+import 'package:university/screens/home_screen/prof_home_screen.dart';
+import 'package:university/screens/home_screen/student_home_screen.dart';
+import 'package:university/screens/quiz/new_quiz_screen.dart';
 import 'package:university/screens/splash_screens/splash_screens.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:university/theme.dart';
@@ -24,18 +28,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context,orientation,deviceType){
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
+      return SafeArea(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
 
-        title: "My University",
-//we will use light theme for  our app
-        theme: CustomTheme().baseTheme,
+          title: "My University",
+        //we will use light theme for  our app
+          theme: CustomTheme().baseTheme,
 
-        //initial route is splash screen
-        //meen first screen
-        initialRoute: SplashScreen.routeName,
-        //define the routes file here in order to access the routes any where all over the app
-        routes: routes,
+          //initial route is splash screen
+          //meen first screen
+          initialRoute:SplashScreen.routeName,
+          //define the routes file here in order to access the routes any where all over the app
+          routes: routes,
+        ),
       );
     });
   }

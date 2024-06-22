@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:university/constants.dart';
@@ -12,8 +13,10 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 5), () {
-      Navigator.pushNamedAndRemoveUntil(
-          context, LoginScreen.routeName, (route) => false);
+
+        Navigator.pushNamedAndRemoveUntil(
+            context, LoginScreen.routeName, (route) => false);
+
     });
     //scaffold color set to primary  color in main in our text theme
     return Scaffold(

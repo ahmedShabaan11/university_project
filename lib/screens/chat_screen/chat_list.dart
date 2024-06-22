@@ -39,58 +39,64 @@ class _ChatListState extends State<ChatList> {
       ),
       backgroundColor: kOtherColor,
       body: isSearch
-          ? GlobalSearchBar(
-              isVisible: isVisible,
-            )
-          : Column(
-              children: [
-                InkWell(
-                  onTap: isVisible,
-                  child: Row(
-                    children: [
-                      Icon(Icons.search),
-                    ],
+          ? Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: GlobalSearchBar(
+                isVisible: isVisible,
+              ),
+          )
+          : Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+                children: [
+                  InkWell(
+                    onTap: isVisible,
+                    child: Row(
+                      children: [
+                        Icon(Icons.search),
+                      ],
+                    ),
                   ),
-                ),
-                if (FirebaseAuth.instance.currentUser!.photoURL ==
-                    StudentHomeScreen.studentHome)
-                  ChatItem(
-                    title: "Student Group",
-                    type: "",
-                    onTap: () {
-                      Navigator.pushNamed(context, GroupChat_Screen.id);
-                    },
-                  ),
-                Expanded(
-                    child: StreamBuilder<QuerySnapshot<UserModel>>(
-                        stream: userFirebase.getUser(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            UserModel userModel =
-                                snapshot.data!.docs.first.data();
-                            return ListView.builder(
-                                itemCount: userModel.connections.length,
-                                itemBuilder: (context, index) {
-                                  return ChatItem(
-                                    title:
-                                        "${userModel.connections[index].firstName} ${userModel.connections[index].lastName}",
-                                    type: userModel.connections[index].type,
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, ChatScreen.chatScreen,
-                                          arguments: [
-                                            userModel,
-                                            userModel.connections[index]
-                                          ]);
-                                    },
-                                  );
-                                });
-                          } else {
-                            return const Center(child: Text('loading..'));
-                          }
-                        }))
-              ],
-            ),
+                  if (FirebaseAuth.instance.currentUser!.photoURL ==
+                      StudentHomeScreen.studentHome)
+                    ChatItem(
+                      title: "Student Group",
+                      type: "",
+                      onTap: () {
+                        Navigator.pushNamed(context, GroupChat_Screen.id);
+                      },
+                    ),
+                  Expanded(
+                      child: StreamBuilder<QuerySnapshot<UserModel>>(
+                          stream: userFirebase.getUser(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              UserModel userModel =
+                                  snapshot.data!.docs.first.data();
+                              return ListView.builder(
+                                  itemCount: userModel.connections.length,
+                                  itemBuilder: (context, index) {
+                                    return ChatItem(
+                                      title:
+                                          "${userModel.connections[index].firstName} ${userModel.connections[index].lastName}",
+                                      type: userModel.connections[index].type,
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, ChatScreen.chatScreen,
+                                            arguments: [
+                                              userModel,
+                                              userModel.connections[index]
+                                            ]);
+                                      },
+                                    );
+                                  });
+                            } else {
+                              return const Center(child: Text('loading..'));
+                            }
+                          }))
+                ],
+              ),
+          ),
     );
   }
 }

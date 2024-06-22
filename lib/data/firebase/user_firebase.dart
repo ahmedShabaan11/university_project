@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:university/core/key_manager.dart';
+import 'package:university/data/models/quiz_model.dart';
 import 'package:university/data/models/user.dart';
 import 'package:university/screens/home_screen/student_home_screen.dart';
 
@@ -74,5 +75,12 @@ class UserFirebase {
     } on Exception catch (e) {
       print(e.toString());
     }
+  }
+
+  solveNewQuiz(UserModel userModel){
+    userRef.doc(userModel.idStu).update({JsonKeyManager.quizzes:jsonEncode(
+        List<QuizModel>.from(userModel.listOfQuizzes ?? [])
+            .map((e) => e.toJson())
+            .toList())});
   }
 }

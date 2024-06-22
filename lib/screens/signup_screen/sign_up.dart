@@ -45,14 +45,15 @@ class _SignUpState extends State<SignUp> {
           lastName: _lastName.text.trim(),
           password: _passwordController.text.trim(),
           type: "",
-          connections: []
+          connections: [],
+          listOfQuizzes: []
         );
 
         FirebaseAuth.instance.currentUser
             ?.updateDisplayName(_firstName.text+" "+_lastName.text);
         FirebaseAuth.instance.currentUser
-            ?.updatePhotoURL(ProfHomeScreen.profHome).then((value) async{
-              userModel.type=ProfHomeScreen.profHome;
+            ?.updatePhotoURL(StudentHomeScreen.studentHome).then((value) async{
+              userModel.type=StudentHomeScreen.studentHome;
            await UserFirebase().addUser(userModel).then((v){
              Navigator.pushReplacementNamed(
                  context, LoginScreen.routeName);
