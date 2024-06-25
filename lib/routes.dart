@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:university/screens/chat_screen/chat_list.dart';
 import 'package:university/screens/chat_screen/chat_screen.dart';
@@ -15,6 +17,7 @@ import 'package:university/screens/meet/my_meet.dart';
 import 'package:university/screens/my_profile/my_profile.dart';
 import 'package:university/screens/quiz/all_quizzes.dart';
 import 'package:university/screens/quiz/component/new_question_widget.dart';
+import 'package:university/screens/quiz/component/prof_quiz.dart';
 import 'package:university/screens/quiz/my_quizzes.dart';
 import 'package:university/screens/quiz/new_quiz_screen.dart';
 import 'package:university/screens/quiz/quiz.dart';
@@ -42,5 +45,6 @@ Map<String, WidgetBuilder> routes = {
   MyQuizzes.myQuizzes: (context) => MyQuizzes(),
   AllQuizzes.allQuizzes: (context) => AllQuizzes(),
   Quiz.quiz: (context) => Quiz(),
+  ProfQuiz.profQuiz:(context)=>ProfQuiz(),
 // FirstChatScreen.firstChatScreen: (context) =>  FirstChatScreen(),
 };

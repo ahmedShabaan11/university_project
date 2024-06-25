@@ -24,28 +24,23 @@ class MyQuizzes extends StatelessWidget {
           if (snapshot.hasData) {
             List<QuizModel> listOfQuizzes =
                 snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
-            try {
+
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
                     itemCount: listOfQuizzes.length,
                     itemBuilder: (context, index) {
-                      try {
+
                         return QuizWidget(
                           subject: listOfQuizzes[index].subject,
                           questionCount:
                               listOfQuizzes[index].questionList.length,
                           doctor: listOfQuizzes[index].doctor,
                         );
-                      } catch (e) {
-                        print('');
                       }
-                    }),
+                    ,),
               );
-            } catch (e) {
-              print('');
             }
-          }
           return SizedBox();
         },
       ),
