@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:university/constants.dart';
+import 'package:university/data/firebase/quiz_firebase.dart';
 import 'package:university/data/firebase/user_firebase.dart';
 import 'package:university/data/models/quiz_model.dart';
 import 'package:university/data/models/user.dart';
@@ -29,6 +30,17 @@ class _ProfQuizState extends State<ProfQuiz> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        actions: [
+          InkWell(
+            child: Icon(
+              Icons.delete,
+              color: Colors.red,
+            ),
+            onTap: () {
+              QuizFirebase().deleteQuizzes(quizModel.id);
+           Navigator.pop(context); },
+          )
+        ],
         title: Text("quiz"),
       ),
       body: Padding(

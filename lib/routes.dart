@@ -17,7 +17,7 @@ import 'package:university/screens/meet/my_meet.dart';
 import 'package:university/screens/my_profile/my_profile.dart';
 import 'package:university/screens/quiz/all_quizzes.dart';
 import 'package:university/screens/quiz/component/new_question_widget.dart';
-import 'package:university/screens/quiz/component/prof_quiz.dart';
+import 'package:university/screens/quiz/prof_quiz.dart';
 import 'package:university/screens/quiz/my_quizzes.dart';
 import 'package:university/screens/quiz/new_quiz_screen.dart';
 import 'package:university/screens/quiz/quiz.dart';

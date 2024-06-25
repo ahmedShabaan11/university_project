@@ -13,10 +13,11 @@ import '../screens/my_profile/my_profile.dart';
 import 'button_home.dart';
 
 class StudentHomeComponents extends StatelessWidget {
-   StudentHomeComponents({super.key});
+  StudentHomeComponents({super.key});
+
   @override
   Widget build(BuildContext context) {
-    UserFirebase userFirebase=UserFirebase();
+    UserFirebase userFirebase = UserFirebase();
 
     return Column(
       children: [
@@ -135,38 +136,43 @@ class StudentHomeComponents extends StatelessWidget {
                                     fontWeight: FontWeight.w800),
                           ),
                           StreamBuilder<QuerySnapshot<UserModel>>(
-                            stream: userFirebase.getUser(),
-                            builder: (context, snapshot) {
-                              if(snapshot.hasData){
-                                UserModel userModel =
-                                snapshot.data!.docs.first.data();
-                                double getDegree(){
-                                  double questionDegree;
-                                  double quizDegree=0;
-                                  double userDegree=0;
-                                  for (var element in userModel.listOfQuizzes!) {
-                                    questionDegree=100/element.questionList.length;
-                                    for (var element in element.questionList) {
-                                      quizDegree+=questionDegree;
+                              stream: userFirebase.getUser(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  UserModel userModel =
+                                      snapshot.data!.docs.first.data();
+                                  double getDegree() {
+                                    double questionDegree;
+                                    double quizDegree = 0;
+                                    double userDegree = 0;
+                                    for (var element
+                                        in userModel.listOfQuizzes!) {
+                                      questionDegree =
+                                          100 / element.questionList.length;
+                                      for (var element
+                                          in element.questionList) {
+                                        quizDegree += questionDegree;
+                                      }
+                                      userDegree = (quizDegree /
+                                          (100 *
+                                              userModel.listOfQuizzes!.length));
                                     }
-                                    userDegree=(quizDegree/(100*userModel.listOfQuizzes!.length));
+                                    return userDegree;
                                   }
-                                  return userDegree;
+
+                                  return Text(
+                                    "${getDegree().toStringAsFixed(2)}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .subtitle2!
+                                        .copyWith(
+                                            fontSize: 25,
+                                            color: kTextBlackColor,
+                                            fontWeight: FontWeight.w300),
+                                  );
                                 }
-                                return Text(
-                                  "${getDegree()}",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle2!
-                                      .copyWith(
-                                      fontSize: 25,
-                                      color: kTextBlackColor,
-                                      fontWeight: FontWeight.w300),
-                                );
-                              }
-                              return Text("Degree");
-                            }
-                          ),
+                                return const Text("Degree");
+                              }),
                         ],
                       ),
                     ),
@@ -215,24 +221,25 @@ class StudentHomeComponents extends StatelessWidget {
           ),
         ),
         StreamBuilder<QuerySnapshot<MeetModel>>(
-          stream: MeetFirebase().getAllMeet(),
-          builder: (context, snapshot) {
-            if(snapshot.hasData){
-              List<MeetModel> listOfMeet =
-                  snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
-              return listOfMeet.isNotEmpty?ElevatedButton(
-                onPressed: () async{
-                  if(!await launchUrl(Uri.parse(listOfMeet.first.url))){
-                    throw Exception('Could not launch url');
-                  }
-                },
-                child: Text("Go TO Meet"),
-              ):SizedBox();
-            }
-            return SizedBox();
-
-          }
-        ),
+            stream: MeetFirebase().getAllMeet(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                List<MeetModel> listOfMeet =
+                    snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
+                return listOfMeet.isNotEmpty
+                    ? ElevatedButton(
+                        onPressed: () async {
+                          if (!await launchUrl(
+                              Uri.parse(listOfMeet.first.url))) {
+                            throw Exception('Could not launch url');
+                          }
+                        },
+                        child: const Text("Go TO Meet"),
+                      )
+                    : SizedBox();
+              }
+              return SizedBox();
+            }),
         Expanded(
           child: Container(
             padding: const EdgeInsets.all(12),

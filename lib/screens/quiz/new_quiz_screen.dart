@@ -18,7 +18,8 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
   @override
   bool needMore = false;
   QuizFirebase quizFirebase = QuizFirebase();
-  List<QuestionModel>listOfQuestion=[];
+  List<QuestionModel> listOfQuestion = [];
+
   Widget build(BuildContext context) {
     return needMore
         ? NewQuestionWidget(
@@ -26,7 +27,8 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
               setState(() {
                 needMore = !needMore;
               });
-            }, listOfQuestion: listOfQuestion,
+            },
+            listOfQuestion: listOfQuestion,
           )
         : Scaffold(
             appBar: AppBar(
@@ -49,6 +51,12 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
                             question: listOfQuestion[index].question,
                             answersCount: listOfQuestion[index].chooses.length,
                             count: index + 1,
+                            onTap: () {
+                              listOfQuestion.removeAt(index);
+                        setState(() {
+
+                        });
+                            },
                           );
                         }),
                   ),
@@ -65,7 +73,7 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.done),
               onPressed: () {
-                if(listOfQuestion.isEmpty){
+                if (listOfQuestion.isEmpty) {
                   return;
                 }
                 setState(() {
