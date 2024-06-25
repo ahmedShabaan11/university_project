@@ -34,41 +34,51 @@ List<ButtonHomeModel> listStudentHomeButton = [
       Navigator.pushNamed(context, ChatList.chatList);
     },
   ),
-  // ButtonHomeModel(
-  //     title: 'Courses', icon: Icons.data_array, onTap: (context) {}),
+  ButtonHomeModel(
+      title: 'All meets',
+      icon: Icons.assessment,
+      onTap: (context) {
+        Navigator.pushNamed(context, AllMeets.allMeets);
+      })
 ];
 
 List<ButtonHomeModel> listProHomeButton = [
   ButtonHomeModel(
-      title: 'new assignment', icon: Icons.assessment, onTap: (context) {
+      title: 'New Quiz',
+      icon: Icons.assessment,
+      onTap: (context) {
         Navigator.pushNamed(context, NewQuizScreen.newQuizScreen);
-  }),
+      }),
   ButtonHomeModel(
-      title: 'chat',
+      title: 'Chat',
       icon: Icons.chat,
       onTap: (context) {
         Navigator.pushNamed(context, ChatList.chatList);
       }),
   ButtonHomeModel(
-      title: 'new meeting',
+      title: 'New meeting',
       icon: Icons.assessment,
       onTap: (context) {
         Navigator.pushNamed(context, AddMeet.addMeet);
-      }),ButtonHomeModel(
-      title: 'my meets',
+      }),
+  ButtonHomeModel(
+      title: 'My meets',
       icon: Icons.assessment,
       onTap: (context) {
         Navigator.pushNamed(context, MyMeets.myMeets);
-      }),ButtonHomeModel(
-      title: 'all meets',
+      }),
+  ButtonHomeModel(
+      title: 'All meets',
       icon: Icons.assessment,
       onTap: (context) {
         Navigator.pushNamed(context, AllMeets.allMeets);
       }),
   ButtonHomeModel(
-      title: 'My assignments', icon: Icons.assessment, onTap: (context) {
+      title: 'My Quiz',
+      icon: Icons.assessment,
+      onTap: (context) {
         Navigator.pushNamed(context, MyQuizzes.myQuizzes);
-  }),
+      }),
 ];
 
 List<ButtonHomeModel> listAdminHomeButton = [

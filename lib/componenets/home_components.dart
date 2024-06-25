@@ -215,14 +215,14 @@ class StudentHomeComponents extends StatelessWidget {
           ),
         ),
         StreamBuilder<QuerySnapshot<MeetModel>>(
-          stream: MeetFirebase().getMeet(),
+          stream: MeetFirebase().getAllMeet(),
           builder: (context, snapshot) {
             if(snapshot.hasData){
               List<MeetModel> listOfMeet =
                   snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
               return listOfMeet.isNotEmpty?ElevatedButton(
                 onPressed: () async{
-                  if(!await launchUrl(Uri.parse(listOfMeet.first.url??""))){
+                  if(!await launchUrl(Uri.parse(listOfMeet.first.url))){
                     throw Exception('Could not launch url');
                   }
                 },

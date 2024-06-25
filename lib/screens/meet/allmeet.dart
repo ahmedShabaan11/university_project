@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:university/data/firebase/meet_firebase.dart';
 import 'package:university/data/models/meet_model.dart';
 import 'package:university/screens/meet/component/meet_widget.dart';
+import 'package:university/screens/meet/component/student_meet_widget.dart';
 
 class AllMeets extends StatelessWidget {
   static String allMeets="AllMeets";
@@ -23,7 +24,7 @@ class AllMeets extends StatelessWidget {
             return ListView.builder(
                 itemCount: listOfMeet.length,
                 itemBuilder: (context, index) {
-                  return MeetWidget(meetModel: listOfMeet[index]);
+                  return StudentMeetWidget(meetModel: listOfMeet[index]);
                 });
           }
           return SizedBox();
