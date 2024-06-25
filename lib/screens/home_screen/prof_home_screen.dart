@@ -10,6 +10,8 @@ import 'package:university/screens/chat_screen/component/global_search_bar.dart'
 import 'package:university/screens/meet/component/meet_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../splash_screens/splash_screens.dart';
+
 class ProfHomeScreen extends StatefulWidget {
   const ProfHomeScreen({super.key});
 
@@ -23,6 +25,38 @@ class _ProfHomeScreenState extends State<ProfHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            Card(elevation: 10,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25),),
+              child: InkWell(
+                onTap: () async {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, SplashScreen.routeName, (route) => false);
+                  await FirebaseAuth.instance.signOut();
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(18),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.power_settings_new_rounded,
+                        color: Colors.red,
+                      ),
+                      kHalfWidthSizedBox,
+                      Text(
+                        'Sign Out',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       backgroundColor: kOtherColor,
       appBar: AppBar(
         centerTitle: true,

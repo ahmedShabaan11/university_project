@@ -13,10 +13,13 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 5), () {
-
+      if (FirebaseAuth.instance.currentUser != null) {
+        Navigator.pushNamedAndRemoveUntil(context,
+            FirebaseAuth.instance.currentUser!.photoURL!, (route) => false);
+      } else {
         Navigator.pushNamedAndRemoveUntil(
             context, LoginScreen.routeName, (route) => false);
-
+      }
     });
     //scaffold color set to primary  color in main in our text theme
     return Scaffold(

@@ -10,6 +10,7 @@ import 'package:university/data/firebase/user_firebase.dart';
 import 'package:university/data/models/user.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:university/screens/splash_screens/splash_screens.dart';
 
 class MyProfileScreens extends StatelessWidget {
   MyProfileScreens({
@@ -29,17 +30,19 @@ class MyProfileScreens extends StatelessWidget {
           title: const Text('My Profile'),
           actions: [
             InkWell(
-              onTap: () {
-                //send Report  to university  managment ,in case if you want some changes to your profile
-              },
+              onTap: () async{
+
+               Navigator.pushNamedAndRemoveUntil(context,SplashScreen.routeName, (route) => false) ;
+               await FirebaseAuth.instance.signOut();
+               },
               child: Container(
                 padding: const EdgeInsets.only(right: kDefaultPadding / 2),
                 child: Row(
                   children: [
-                    const Icon(Icons.report_gmailerrorred_outlined),
+                    const Icon(Icons.output),
                     kHalfWidthSizedBox,
                     Text(
-                      'Report ',
+                      'Sign Out',
                       style: Theme.of(context).textTheme.subtitle2,
                     ),
                   ],
