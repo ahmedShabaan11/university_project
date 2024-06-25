@@ -7,7 +7,9 @@ import 'package:university/screens/quiz/component/quiz_widget.dart';
 
 class MyQuizzes extends StatelessWidget {
   const MyQuizzes({super.key});
-  static String myQuizzes="myQuizzes";
+
+  static String myQuizzes = "myQuizzes";
+
   @override
   Widget build(BuildContext context) {
     QuizFirebase quizFirebase = QuizFirebase();
@@ -22,15 +24,27 @@ class MyQuizzes extends StatelessWidget {
           if (snapshot.hasData) {
             List<QuizModel> listOfQuizzes =
                 snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(itemCount: listOfQuizzes.length,
-                  itemBuilder: (context, index) {
-                return QuizWidget(
-                    subject: listOfQuizzes[index].subject,
-                    questionCount: listOfQuizzes[index].questionList.length,doctor: listOfQuizzes[index].doctor,);
-              }),
-            );
+            try {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                    itemCount: listOfQuizzes.length,
+                    itemBuilder: (context, index) {
+                      try {
+                        return QuizWidget(
+                          subject: listOfQuizzes[index].subject,
+                          questionCount:
+                              listOfQuizzes[index].questionList.length,
+                          doctor: listOfQuizzes[index].doctor,
+                        );
+                      } catch (e) {
+                        print('');
+                      }
+                    }),
+              );
+            } catch (e) {
+              print('');
+            }
           }
           return SizedBox();
         },

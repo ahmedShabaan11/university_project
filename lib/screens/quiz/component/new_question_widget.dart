@@ -5,14 +5,14 @@ import 'package:university/data/models/quiz_model.dart';
 import 'package:university/screens/quiz/component/new_answer_widget.dart';
 
 class NewQuestionWidget extends StatefulWidget {
-  NewQuestionWidget({this.onPressed});
+  NewQuestionWidget({  this.listOfQuestion ,this.onPressed});
   void Function()? onPressed;
   static String newQuestionScreen = "newQuestionScreen";
   List<TextEditingController> listOfAnswerController = [];
   List<Answer> listOfAnswer = [];
   TextEditingController question=TextEditingController();
   String? selectedValue;
-
+  List<QuestionModel>?listOfQuestion=[];
   // QuestionModel? questionModel;
   @override
   State<NewQuestionWidget> createState() => _NewQuestionWidgetState();
@@ -72,7 +72,7 @@ class _NewQuestionWidgetState extends State<NewQuestionWidget> {
                               text: element.text,
                               isAnswer: element.text == widget.selectedValue));
                         }
-                        listOfQuestion.add(QuestionModel(question: widget.question.text, chooses: widget.listOfAnswer));
+                      widget.listOfQuestion!.add(QuestionModel(question: widget.question.text, chooses: widget.listOfAnswer));
                         widget.onPressed!();
                       }
                     },

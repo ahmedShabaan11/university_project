@@ -4,6 +4,8 @@ import 'package:university/data/firebase/quiz_firebase.dart';
 import 'package:university/screens/quiz/component/new_question_widget.dart';
 import 'package:university/screens/quiz/component/question_item.dart';
 
+import '../../data/models/quiz_model.dart';
+
 class NewQuizScreen extends StatefulWidget {
   static String newQuizScreen = "newQuizScreen";
 
@@ -15,16 +17,16 @@ class NewQuizScreen extends StatefulWidget {
 class _NewQuizScreenState extends State<NewQuizScreen> {
   @override
   bool needMore = false;
-QuizFirebase quizFirebase=QuizFirebase();
+  QuizFirebase quizFirebase = QuizFirebase();
+  List<QuestionModel>listOfQuestion=[];
   Widget build(BuildContext context) {
-
     return needMore
         ? NewQuestionWidget(
             onPressed: () {
               setState(() {
                 needMore = !needMore;
               });
-            },
+            }, listOfQuestion: listOfQuestion,
           )
         : Scaffold(
             appBar: AppBar(
@@ -35,7 +37,10 @@ QuizFirebase quizFirebase=QuizFirebase();
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  CustomTextFormField(text: "Enter Subject",controller: quizFirebase.subject,),
+                  CustomTextFormField(
+                    text: "Enter Subject",
+                    controller: quizFirebase.subject,
+                  ),
                   Expanded(
                     child: ListView.builder(
                         itemCount: listOfQuestion.length,
@@ -60,13 +65,16 @@ QuizFirebase quizFirebase=QuizFirebase();
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.done),
               onPressed: () {
-
+                if(listOfQuestion.isEmpty){
+                  return;
+                }
                 setState(() {
                   quizFirebase
-                      .newQuiz()
+                      .newQuiz(listOfQuestion)
                       .then((value) => listOfQuestion.clear());
+                  quizFirebase.subject.clear();
                 });
-                quizFirebase.subject.clear();
+                Navigator.pop(context);
               },
             ),
           );

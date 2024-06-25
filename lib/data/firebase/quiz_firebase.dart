@@ -9,26 +9,32 @@ class QuizFirebase {
   final quizRef = FirebaseFirestore.instance
       .collection('Quiz')
       .withConverter<QuizModel>(
-      fromFirestore: (snapshot, _) => QuizModel.fromJson(snapshot.data()!),
-      toFirestore: (quiz, _) => quiz.toJson());
+          fromFirestore: (snapshot, _) => QuizModel.fromJson(snapshot.data()!),
+          toFirestore: (quiz, _) => quiz.toJson());
 
-  TextEditingController subject=TextEditingController();
-  Future<void> newQuiz() async {
+  TextEditingController subject = TextEditingController();
+
+  Future<void> newQuiz(List<QuestionModel>listOfQuestion) async {
     try {
       final doc = quizRef.doc();
-      await doc.set(QuizModel(id: doc.id, uid: FirebaseAuth.instance.currentUser!.uid, doctor: FirebaseAuth.instance.currentUser!.displayName!, subject: subject.text, questionList: listOfQuestion));
+      await doc.set(QuizModel(
+          id: doc.id,
+          uid: FirebaseAuth.instance.currentUser!.uid,
+          doctor: FirebaseAuth.instance.currentUser!.displayName!,
+          subject: subject.text,
+          questionList: listOfQuestion));
     } on Exception catch (e) {
       print(e.toString());
     }
   }
 
-
   Stream<QuerySnapshot<QuizModel>> getMyAllQuizzes() {
     return quizRef
         .where(
-      JsonKeyManager.uid,
-      isEqualTo: FirebaseAuth.instance.currentUser!.uid,
-    ).snapshots();
+          JsonKeyManager.uid,
+          isEqualTo: FirebaseAuth.instance.currentUser!.uid,
+        )
+        .snapshots();
   }
 
   Stream<QuerySnapshot<QuizModel>> getAllQuizzes() {
@@ -39,4 +45,3 @@ class QuizFirebase {
     await quizRef.doc(id).delete();
   }
 }
-List<QuestionModel>listOfQuestion=[];

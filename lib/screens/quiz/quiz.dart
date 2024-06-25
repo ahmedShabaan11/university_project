@@ -5,7 +5,7 @@ import 'package:university/data/models/user.dart';
 import 'package:university/screens/quiz/component/question_widget.dart';
 
 class Quiz extends StatefulWidget {
-   Quiz({super.key});
+  Quiz({super.key});
 
   int questionIndex = 0;
   static String quiz = "quiz";
@@ -52,11 +52,11 @@ class _QuizState extends State<Quiz> {
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              listQuestionWidget[ widget.questionIndex ],
+              listQuestionWidget[widget.questionIndex],
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                 widget.questionIndex != 0
+                  widget.questionIndex != 0
                       ? InkWell(
                           onTap: () {
                             if (widget.questionIndex > 0) {
@@ -89,20 +89,20 @@ class _QuizState extends State<Quiz> {
                                           quizModel.questionList[i].question,
                                       chooses: [
                                         Answer(
-                                          text:
-                                              listQuestionWidget[ widget.questionIndex ]
-                                                  .questionModel
-                                                  .chooses[listQuestionWidget[
-                                              widget.questionIndex ]
-                                                      .selectedValue]
-                                                  .text,
-                                          isAnswer:
-                                              listQuestionWidget[ widget.questionIndex ]
-                                                  .questionModel
-                                                  .chooses[listQuestionWidget[
-                                              widget.questionIndex ]
-                                                      .selectedValue]
-                                                  .isAnswer,
+                                          text: listQuestionWidget[
+                                                  widget.questionIndex]
+                                              .questionModel
+                                              .chooses[listQuestionWidget[
+                                                      widget.questionIndex]
+                                                  .selectedValue]
+                                              .text,
+                                          isAnswer: listQuestionWidget[
+                                                  widget.questionIndex]
+                                              .questionModel
+                                              .chooses[listQuestionWidget[
+                                                      widget.questionIndex]
+                                                  .selectedValue]
+                                              .isAnswer,
                                         ),
                                       ]),
                                 );
@@ -112,7 +112,11 @@ class _QuizState extends State<Quiz> {
                               UserFirebase().solveNewQuiz(userModel!);
                             }
                             setState(() {});
-                            Navigator.pop(context);
+                            try {
+                              Navigator.pop(context);
+                            } catch (e) {
+                              print(' ');
+                            }
                           },
                           child: Column(
                             children: [
@@ -123,8 +127,9 @@ class _QuizState extends State<Quiz> {
                         )
                       : InkWell(
                           onTap: () {
-                            if ( widget.questionIndex  < listOfAnswers.length - 1) {
-                              widget.questionIndex ++;
+                            if (widget.questionIndex <
+                                listOfAnswers.length - 1) {
+                              widget.questionIndex++;
                             }
                             setState(() {});
                           },
