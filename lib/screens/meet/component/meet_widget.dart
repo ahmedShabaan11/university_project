@@ -39,7 +39,7 @@ class MeetWidget extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    if (!await launchUrl(Uri.parse(meetModel.url))) {
+                    if (!await launchUrl(Uri.parse(meetModel.url.contains("https://")?meetModel.url:"https://${meetModel.url}"))) {
                       throw Exception('Could not launch url');
                     }
                   },
