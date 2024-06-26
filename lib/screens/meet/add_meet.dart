@@ -22,11 +22,12 @@ class _AddMeetState extends State<AddMeet> {
         title: const Text("New Meet"),
       ),
       backgroundColor: Colors.white,
-      body: Padding(
+      body:ListView(
+            children: [ Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Form(
+        child: Card(elevation:15,child:Form(
           key: formKey,
-          child: ListView(
+          child:Column(
             children: [
               SizedBox(height:MediaQuery.of(context).size.height*0.18),
               CustomTextFormField(
@@ -122,8 +123,8 @@ class _AddMeetState extends State<AddMeet> {
                   child: Text("New Meet"))
             ],
           ),
-        ),
+        ),),
       ),
-    );
+    ),]);
   }
 }
