@@ -23,13 +23,12 @@ class _AddMeetState extends State<AddMeet> {
       ),
       backgroundColor: Colors.white,
       body:ListView(
-            children: [ Padding(
+            children: [SizedBox(height:MediaQuery.of(context).size.height*0.18), Padding(
         padding: const EdgeInsets.all(16.0),
         child: Card(elevation:15,child:Form(
           key: formKey,
           child:Column(
             children: [
-              SizedBox(height:MediaQuery.of(context).size.height*0.18),
               CustomTextFormField(
                 text: "Meet Url",
                 controller: meetFirebase.url,
