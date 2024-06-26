@@ -7,29 +7,49 @@ import '../../../data/firebase/meet_firebase.dart';
 
 class MeetWidget extends StatelessWidget {
   MeetModel meetModel;
-   MeetWidget({super.key,required this.meetModel});
+
+  MeetWidget({super.key, required this.meetModel});
 
   @override
   Widget build(BuildContext context) {
-    return Card(elevation: 20,
+    return Card(
+      elevation: 20,
       color: kPrimaryColor,
-      child: ListTile(
-        title: Text(meetModel.doctor),
-        subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
           children: [
-            ElevatedButton(
-              onPressed: () async{
-                if(!await launchUrl(Uri.parse(meetModel.url))){
-                  throw Exception('Could not launch url');
-                }
-              },
-              child: Text("Go TO Meet"),
-            ),ElevatedButton(
-              onPressed: () async{
-                MeetFirebase().deleteMeet(meetModel.id);
-              },
-              child: Text("Delete Meet"),
+            Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text("Dr.${meetModel.doctor}"),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text('${meetModel.start}'),
+                    Text('${meetModel.end}'),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    if (!await launchUrl(Uri.parse(meetModel.url))) {
+                      throw Exception('Could not launch url');
+                    }
+                  },
+                  child: const Text("Go TO Meet"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    MeetFirebase().deleteMeet(meetModel.id);
+                  },
+                  child: const Text("Delete Meet"),
+                ),
+              ],
             ),
           ],
         ),
@@ -37,3 +57,4 @@ class MeetWidget extends StatelessWidget {
     );
   }
 }
+
