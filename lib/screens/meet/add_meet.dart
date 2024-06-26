@@ -28,6 +28,7 @@ class _AddMeetState extends State<AddMeet> {
           key: formKey,
           child: ListView(
             children: [
+              SizedBox(height:MediaQuery.of(context).size.height*0.18),
               CustomTextFormField(
                 text: "Meet Url",
                 controller: meetFirebase.url,
