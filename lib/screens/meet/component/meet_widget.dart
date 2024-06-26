@@ -22,13 +22,15 @@ class MeetWidget extends StatelessWidget {
             Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text("Dr.${meetModel.doctor}"),
+                Text(style:TextStyle(color: Colors.white),"Dr.${meetModel.doctor}"),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text('${meetModel.start}'),
-                    Text('${meetModel.end}'),
-                  ],
+                    Text(  style:TextStyle(color: Colors.white),
+                        '${meetModel.start.year}-${meetModel.start.month}-${meetModel.start.day} ${TimeOfDay(hour: meetModel.start.hour, minute: meetModel.start.minute).format(context)}'),
+
+                    Text(style:TextStyle(color: Colors.white),
+                        '${meetModel.end.year}-${meetModel.end.month}-${meetModel.end.day} ${TimeOfDay(hour: meetModel.end.hour, minute: meetModel.end.minute).format(context)}'), ],
                 ),
               ],
             ),
