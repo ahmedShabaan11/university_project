@@ -71,7 +71,7 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.done),
+              child: const Icon(Icons.done),
               onPressed: () {
                 if (listOfQuestion.isEmpty) {
                   return;

@@ -12,7 +12,7 @@ class AllMeets extends StatelessWidget {
   Widget build(BuildContext context) {
     MeetFirebase meetFirebase = MeetFirebase();
     return Scaffold(
-      appBar: AppBar(title: Text("All Meets"),),
+      appBar: AppBar(title: const Text("All Meets"),),
 
       backgroundColor: Colors.white,
       body: StreamBuilder<QuerySnapshot<MeetModel>>(

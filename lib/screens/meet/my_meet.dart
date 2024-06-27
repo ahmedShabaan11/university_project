@@ -12,7 +12,7 @@ static String myMeets="myMeets";
   Widget build(BuildContext context) {
     MeetFirebase meetFirebase = MeetFirebase();
     return Scaffold(
-      appBar: AppBar(title: Text("My Meets"),),
+      appBar: AppBar(title: const Text("My Meets"),),
       backgroundColor: Colors.white,
       body: StreamBuilder<QuerySnapshot<MeetModel>>(
         stream: meetFirebase.getMyAllMeet(),
@@ -27,7 +27,7 @@ static String myMeets="myMeets";
                   return MeetWidget(meetModel: listOfMeet[index]);
                 });
           }
-          return SizedBox();
+          return const SizedBox();
         },
       ),
     );

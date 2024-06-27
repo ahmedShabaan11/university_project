@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 2), () {
       if (FirebaseAuth.instance.currentUser != null) {
         Navigator.pushNamedAndRemoveUntil(context,
             FirebaseAuth.instance.currentUser!.photoURL!, (route) => false);

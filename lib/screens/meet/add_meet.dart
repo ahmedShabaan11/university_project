@@ -37,7 +37,7 @@ class _AddMeetState extends State<AddMeet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
+                    width: MediaQuery.of(context).size.width * 0.5,
                     child: CustomTextFormField(
                       enabled: false,
                       text: "Start Meet",
@@ -78,7 +78,7 @@ class _AddMeetState extends State<AddMeet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
+                    width: MediaQuery.of(context).size.width * 0.5,
                     child: CustomTextFormField(
                       enabled: false,
                       text: "End Meet",
@@ -86,7 +86,7 @@ class _AddMeetState extends State<AddMeet> {
                     ),
                   ),
                   ElevatedButton(
-                    child: Text("End"),
+                    child: const Text("End"),
                     onPressed: () {
                       showDatePicker(
                         context: context,
@@ -119,7 +119,7 @@ class _AddMeetState extends State<AddMeet> {
                       Navigator.pop(context);
                     }
                   },
-                  child: Text("New Meet"))
+                  child: const Text("New Meet"))
             ],
           ),
         ),),

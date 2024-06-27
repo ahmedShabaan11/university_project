@@ -44,7 +44,7 @@ class _QuizState extends State<Quiz> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("quiz"),
+        title: const Text("quiz"),
       ),
       body: Form(
         key: formKey,
@@ -64,14 +64,14 @@ class _QuizState extends State<Quiz> {
                               setState(() {});
                             }
                           },
-                          child: Column(
+                          child: const Column(
                             children: [
                               Icon(Icons.arrow_back_ios),
                               Text("Back"),
                             ],
                           ),
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                   listOfAnswers.length - 1 == widget.questionIndex
                       ? InkWell(
                           onTap: () {
@@ -118,7 +118,7 @@ class _QuizState extends State<Quiz> {
                               print(' ');
                             }
                           },
-                          child: Column(
+                          child: const Column(
                             children: [
                               Icon(Icons.done),
                               Text("Done"),
@@ -133,7 +133,7 @@ class _QuizState extends State<Quiz> {
                             }
                             setState(() {});
                           },
-                          child: Column(
+                          child: const Column(
                             children: [
                               Icon(Icons.arrow_forward_ios),
                               Text("Next"),

@@ -41,7 +41,7 @@ class _ProfQuizState extends State<ProfQuiz> {
            Navigator.pop(context); },
           )
         ],
-        title: Text("quiz"),
+        title: const Text("quiz"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
