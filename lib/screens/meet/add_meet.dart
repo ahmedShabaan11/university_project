@@ -27,7 +27,6 @@ class _AddMeetState extends State<AddMeet> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Card(
-
             elevation: 15,
             child:
             Form(
@@ -93,30 +92,33 @@ class _AddMeetState extends State<AddMeet> {
                             controller: meetFirebase.endController,
                           ),
                         ),
-                        ElevatedButton(
-                          child: const Text("End"),
-                          onPressed: () {
-                            showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime.now().add(
-                                const Duration(days: 365),
-                              ),
-                            ).then((value) {
-                              if (value == null) return;
-                              meetFirebase.end = value;
-                              showTimePicker(
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          child: ElevatedButton(
+                            child: const Text("End"),
+                            onPressed: () {
+                              showDatePicker(
                                 context: context,
-                                initialTime: TimeOfDay.now(),
-                              ).then((v) {
-                                if (v == null) return;
-                                meetFirebase.endTime = v;
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime.now().add(
+                                  const Duration(days: 365),
+                                ),
+                              ).then((value) {
+                                if (value == null) return;
+                                meetFirebase.end = value;
+                                showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.now(),
+                                ).then((v) {
+                                  if (v == null) return;
+                                  meetFirebase.endTime = v;
+                                });
+                                meetFirebase.endController.text =
+                                    "DATE ${meetFirebase.end?.day} - ${meetFirebase.end?.month} - ${meetFirebase.end?.year} TIME ${meetFirebase.endTime?.hour}:${meetFirebase.endTime?.minute}";
                               });
-                              meetFirebase.endController.text =
-                                  "DATE ${meetFirebase.end?.day} - ${meetFirebase.end?.month} - ${meetFirebase.end?.year} TIME ${meetFirebase.endTime?.hour}:${meetFirebase.endTime?.minute}";
-                            });
-                          },
+                            },
+                          ),
                         ),
                       ],
                     ),  const SizedBox(height: 12,),
