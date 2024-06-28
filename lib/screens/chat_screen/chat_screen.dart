@@ -22,6 +22,7 @@ class ChatScreen extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as List<UserModel?>;
     final controller = TextEditingController();
     return Scaffold(
+      appBar: AppBar(title: Text("${users[1]!.firstName } ${users[1]!.lastName}"),),
       backgroundColor: kOtherColor,
       body: StreamBuilder<QuerySnapshot<MessageModel>>(
           stream: messageFirebase.getAllMessage(),
