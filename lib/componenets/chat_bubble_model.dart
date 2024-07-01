@@ -36,7 +36,7 @@ class Caht_Bubble extends StatelessWidget {
                Text(
               message.name,
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                    const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               ),
               Text(
                 message.message,

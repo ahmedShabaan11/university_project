@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:university/screens/chat_screen/chat_list.dart';
 import 'package:university/screens/chat_screen/group_chat_screen.dart';
+import 'package:university/screens/course/courseScreen.dart';
 import 'package:university/screens/meet/add_meet.dart';
 import 'package:university/screens/meet/allmeet.dart';
 import 'package:university/screens/meet/my_meet.dart';
@@ -20,6 +21,7 @@ class ButtonHomeModel {
 }
 
 List<ButtonHomeModel> listStudentHomeButton = [
+
   ButtonHomeModel(
     title: 'Quizzes',
     icon: Icons.assignment_add,
@@ -36,16 +38,23 @@ List<ButtonHomeModel> listStudentHomeButton = [
   ),
   ButtonHomeModel(
       title: 'All meets',
-      icon: Icons.assessment,
+      icon: Icons.meeting_room,
       onTap: (context) {
         Navigator.pushNamed(context, AllMeets.allMeets);
-      })
+      }),
+  ButtonHomeModel(
+    title: 'Course',
+    icon: Icons.insert_chart_outlined_rounded,
+    onTap: (context) {
+      Navigator.pushNamed(context, Course.course);
+    },
+  )
 ];
 
 List<ButtonHomeModel> listProHomeButton = [
   ButtonHomeModel(
       title: 'New Quiz',
-      icon: Icons.assessment,
+      icon: Icons.quiz,
       onTap: (context) {
         Navigator.pushNamed(context, NewQuizScreen.newQuizScreen);
       }),
@@ -57,19 +66,19 @@ List<ButtonHomeModel> listProHomeButton = [
       }),
   ButtonHomeModel(
       title: 'New meeting',
-      icon: Icons.assessment,
+      icon: Icons.meeting_room_outlined,
       onTap: (context) {
         Navigator.pushNamed(context, AddMeet.addMeet);
       }),
   ButtonHomeModel(
       title: 'My meets',
-      icon: Icons.assessment,
+      icon: Icons.meeting_room_rounded,
       onTap: (context) {
         Navigator.pushNamed(context, MyMeets.myMeets);
       }),
   ButtonHomeModel(
       title: 'All meets',
-      icon: Icons.assessment,
+      icon: Icons.meeting_room,
       onTap: (context) {
         Navigator.pushNamed(context, AllMeets.allMeets);
       }),

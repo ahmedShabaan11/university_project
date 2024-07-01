@@ -5,6 +5,7 @@ import 'package:university/screens/chat_screen/chat_list.dart';
 import 'package:university/screens/chat_screen/chat_screen.dart';
 import 'package:university/screens/chat_screen/first_chat_screen.dart';
 import 'package:university/screens/chat_screen/group_chat_screen.dart';
+import 'package:university/screens/course/courseScreen.dart';
 import 'package:university/screens/home_screen/admin_home_screen.dart';
 import 'package:university/screens/home_screen/prof_home_screen.dart';
 import 'package:university/screens/home_screen/student_home_screen.dart';
@@ -46,5 +47,6 @@ Map<String, WidgetBuilder> routes = {
   AllQuizzes.allQuizzes: (context) => AllQuizzes(),
   Quiz.quiz: (context) => Quiz(),
   ProfQuiz.profQuiz:(context)=>ProfQuiz(),
+  Course.course:(context)=>const Course(),
 // FirstChatScreen.firstChatScreen: (context) =>  FirstChatScreen(),
 };

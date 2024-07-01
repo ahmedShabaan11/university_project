@@ -126,7 +126,7 @@ class StudentHomeComponents extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            'Degree',
+                            'GPA',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2!
@@ -161,7 +161,7 @@ class StudentHomeComponents extends StatelessWidget {
                                   }
 
                                   return Text(
-                                    "${getDegree().toStringAsFixed(2)}",
+                                    "3.5",
                                     style: Theme.of(context)
                                         .textTheme
                                         .subtitle2!
@@ -171,7 +171,7 @@ class StudentHomeComponents extends StatelessWidget {
                                             fontWeight: FontWeight.w300),
                                   );
                                 }
-                                return const Text("Degree");
+                                return const Text("GPA");
                               }),
                         ],
                       ),
@@ -192,7 +192,7 @@ class StudentHomeComponents extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            'Cost ',
+                            'The Number Of Hours',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2!
@@ -202,7 +202,7 @@ class StudentHomeComponents extends StatelessWidget {
                                     fontWeight: FontWeight.w800),
                           ),
                           Text(
-                            '6000\Pound',
+                            '18\Hours',
                             style: Theme.of(context)
                                 .textTheme
                                 .subtitle2!
@@ -236,9 +236,9 @@ class StudentHomeComponents extends StatelessWidget {
                         },
                         child: const Text("Go TO Meet"),
                       )
-                    : SizedBox();
+                    : const SizedBox();
               }
-              return SizedBox();
+              return const SizedBox();
             }),
         Expanded(
           child: Container(

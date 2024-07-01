@@ -57,12 +57,12 @@ class AllQuizzes extends StatelessWidget {
                             );
                           }
 
-                          return SizedBox();
+                          return const SizedBox();
                         });
                   }),
             );
           }
-          return SizedBox();
+          return const SizedBox();
         },
       ),
     );
