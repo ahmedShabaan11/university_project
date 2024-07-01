@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:university/componenets/button_home.dart';
-import 'package:university/componenets/button_home_model.dart';
+import 'package:university/screens/home_screen/component/button_home.dart';
+import 'package:university/data/models/button_home_model.dart';
 import 'package:university/constants.dart';
 import 'package:university/data/firebase/meet_firebase.dart';
 import 'package:university/data/models/meet_model.dart';

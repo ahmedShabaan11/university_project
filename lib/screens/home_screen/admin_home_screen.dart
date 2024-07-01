@@ -1,8 +1,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:university/componenets/button_home.dart';
-import 'package:university/componenets/button_home_model.dart';
+import 'package:university/screens/home_screen/component/button_home.dart';
+import 'package:university/data/models/button_home_model.dart';
 import 'package:university/constants.dart';
 import 'package:university/screens/signup_screen/sign_up_prof.dart';
 import 'package:university/screens/splash_screens/splash_screens.dart';

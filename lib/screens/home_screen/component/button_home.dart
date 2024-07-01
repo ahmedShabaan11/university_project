@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:university/constants.dart';
-import 'package:university/componenets/button_home_model.dart';
+import 'package:university/data/models/button_home_model.dart';
 
 
 class ButtonHome extends StatelessWidget {

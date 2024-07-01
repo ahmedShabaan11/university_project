@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:university/componenets/button_home_model.dart';
+import 'package:university/data/models/button_home_model.dart';
 import 'package:university/data/firebase/meet_firebase.dart';
 import 'package:university/data/firebase/user_firebase.dart';
 import 'package:university/data/models/meet_model.dart';
 import 'package:university/data/models/user.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../constants.dart';
-import '../screens/my_profile/my_profile.dart';
+import '../../../constants.dart';
+import '../../my_profile/my_profile.dart';
 import 'button_home.dart';
 
 class StudentHomeComponents extends StatelessWidget {
@@ -23,8 +23,14 @@ class StudentHomeComponents extends StatelessWidget {
       children: [
 //we will divide the screen into two parts
         Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 2.5,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height / 2.5,
           padding: const EdgeInsets.all(kDefaultPadding),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +51,7 @@ class StudentHomeComponents extends StatelessWidget {
                       maxRadius: 50.0,
                       backgroundColor: kSecondaryColor,
                       backgroundImage:
-                          AssetImage('assets/images/student_profile.jpeg'),
+                      AssetImage('assets/images/student_profile.jpeg'),
                     ),
                   ),
                   const SizedBox(
@@ -59,16 +65,24 @@ class StudentHomeComponents extends StatelessWidget {
                           Text(
                             "Hi",
                             style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      fontWeight: FontWeight.w200,
-                                    ),
+                            Theme
+                                .of(context)
+                                .textTheme
+                                .subtitle1!
+                                .copyWith(
+                              fontWeight: FontWeight.w200,
+                            ),
                           ),
                           Text(
                             FirebaseAuth.instance.currentUser!.displayName!,
                             style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                            Theme
+                                .of(context)
+                                .textTheme
+                                .subtitle1!
+                                .copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ],
                       ),
@@ -77,9 +91,13 @@ class StudentHomeComponents extends StatelessWidget {
                       ),
                       Text(
                         'Class X-II A | Roll no:12',
-                        style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                              fontSize: 14.0,
-                            ),
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .subtitle2!
+                            .copyWith(
+                          fontSize: 14.0,
+                        ),
                       ),
                       const SizedBox(
                         height: kDefaultPadding / 2,
@@ -116,8 +134,16 @@ class StudentHomeComponents extends StatelessWidget {
 //go to attendance screen  here
                     },
                     child: Container(
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      height: MediaQuery.of(context).size.height / 9,
+                      padding: EdgeInsets.all(8),
+
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 2.5,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 9,
                       decoration: BoxDecoration(
                         color: kOtherColor,
                         borderRadius: BorderRadius.circular(kDefaultPadding),
@@ -127,30 +153,31 @@ class StudentHomeComponents extends StatelessWidget {
                         children: [
                           Text(
                             'GPA',
-                            style: Theme.of(context)
+                            style: Theme
+                                .of(context)
                                 .textTheme
                                 .bodyText2!
                                 .copyWith(
-                                    fontSize: 16,
-                                    color: kTextBlackColor,
-                                    fontWeight: FontWeight.w800),
+                                fontSize: 16,
+                                color: kTextBlackColor,
+                                fontWeight: FontWeight.w800),
                           ),
                           StreamBuilder<QuerySnapshot<UserModel>>(
                               stream: userFirebase.getUser(),
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   UserModel userModel =
-                                      snapshot.data!.docs.first.data();
+                                  snapshot.data!.docs.first.data();
                                   double getDegree() {
                                     double questionDegree;
                                     double quizDegree = 0;
                                     double userDegree = 0;
                                     for (var element
-                                        in userModel.listOfQuizzes!) {
+                                    in userModel.listOfQuizzes!) {
                                       questionDegree =
                                           100 / element.questionList.length;
                                       for (var element
-                                          in element.questionList) {
+                                      in element.questionList) {
                                         quizDegree += questionDegree;
                                       }
                                       userDegree = (quizDegree /
@@ -162,13 +189,14 @@ class StudentHomeComponents extends StatelessWidget {
 
                                   return Text(
                                     "3.5",
-                                    style: Theme.of(context)
+                                    style: Theme
+                                        .of(context)
                                         .textTheme
                                         .subtitle2!
                                         .copyWith(
-                                            fontSize: 25,
-                                            color: kTextBlackColor,
-                                            fontWeight: FontWeight.w300),
+                                        fontSize: 25,
+                                        color: kTextBlackColor,
+                                        fontWeight: FontWeight.w300),
                                   );
                                 }
                                 return const Text("GPA");
@@ -182,8 +210,15 @@ class StudentHomeComponents extends StatelessWidget {
 //go to attendance screen  here
                     },
                     child: Container(
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      height: MediaQuery.of(context).size.height / 9,
+                      padding: EdgeInsets.all(8),
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 2.5,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 9,
                       decoration: BoxDecoration(
                         color: kOtherColor,
                         borderRadius: BorderRadius.circular(kDefaultPadding),
@@ -192,24 +227,26 @@ class StudentHomeComponents extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            'The Number Of Hours',
-                            style: Theme.of(context)
+                            'Hours',
+                            style: Theme
+                                .of(context)
                                 .textTheme
                                 .bodyText2!
                                 .copyWith(
-                                    fontSize: 16,
-                                    color: kTextBlackColor,
-                                    fontWeight: FontWeight.w800),
+                                fontSize: 16,
+                                color: kTextBlackColor,
+                                fontWeight: FontWeight.w800),
                           ),
                           Text(
-                            '18\Hours',
-                            style: Theme.of(context)
+                            '18',
+                            style: Theme
+                                .of(context)
                                 .textTheme
                                 .subtitle2!
                                 .copyWith(
-                                    fontSize: 25,
-                                    color: kTextBlackColor,
-                                    fontWeight: FontWeight.w300),
+                                fontSize: 25,
+                                color: kTextBlackColor,
+                                fontWeight: FontWeight.w300),
                           ),
                         ],
                       ),
@@ -228,14 +265,14 @@ class StudentHomeComponents extends StatelessWidget {
                     snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
                 return listOfMeet.isNotEmpty
                     ? ElevatedButton(
-                        onPressed: () async {
-                          if (!await launchUrl(
-                              Uri.parse(listOfMeet.first.url))) {
-                            throw Exception('Could not launch url');
-                          }
-                        },
-                        child: const Text("Go TO Meet"),
-                      )
+                  onPressed: () async {
+                    if (!await launchUrl(
+                        Uri.parse(listOfMeet.first.url))) {
+                      throw Exception('Could not launch url');
+                    }
+                  },
+                  child: const Text("Go TO Meet"),
+                )
                     : const SizedBox();
               }
               return const SizedBox();

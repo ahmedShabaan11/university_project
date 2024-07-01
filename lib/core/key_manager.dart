@@ -3,6 +3,7 @@ class JsonKeyManager{
  static const String id="id";
  static const String idStu="idStu";
  static const String name="name";
+ static const String hour="hour";
  static const String email="email";
  static const String message="message";
  static const String date="date";

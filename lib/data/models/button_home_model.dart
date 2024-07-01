@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:university/screens/chat_screen/chat_list.dart';
 import 'package:university/screens/chat_screen/group_chat_screen.dart';
-import 'package:university/screens/course/courseScreen.dart';
 import 'package:university/screens/meet/add_meet.dart';
 import 'package:university/screens/meet/allmeet.dart';
 import 'package:university/screens/meet/my_meet.dart';
@@ -10,6 +9,9 @@ import 'package:university/screens/quiz/all_quizzes.dart';
 import 'package:university/screens/quiz/my_quizzes.dart';
 import 'package:university/screens/quiz/new_quiz_screen.dart';
 import 'package:university/screens/signup_screen/sign_up_prof.dart';
+import 'package:university/screens/subject/add_subject.dart';
+import 'package:university/screens/subject/subjectScreen.dart';
+import 'package:university/screens/subject/view_subject_screen.dart';
 
 class ButtonHomeModel {
   String title;
@@ -43,10 +45,10 @@ List<ButtonHomeModel> listStudentHomeButton = [
         Navigator.pushNamed(context, AllMeets.allMeets);
       }),
   ButtonHomeModel(
-    title: 'Course',
+    title: 'Subjects',
     icon: Icons.insert_chart_outlined_rounded,
     onTap: (context) {
-      Navigator.pushNamed(context, Course.course);
+      Navigator.pushNamed(context, Subject.subjectScreen);
     },
   )
 ];
@@ -96,5 +98,15 @@ List<ButtonHomeModel> listAdminHomeButton = [
       icon: Icons.person,
       onTap: (context) {
         Navigator.pushNamed(context, SignUpProf.newProfAcc);
+      }),ButtonHomeModel(
+      title: 'Add New Subject',
+      icon: Icons.subject,
+      onTap: (context) {
+        Navigator.pushNamed(context, AddSubject.addSubject);
+      }),ButtonHomeModel(
+      title: 'View Subject',
+      icon: Icons.book,
+      onTap: (context) {
+        Navigator.pushNamed(context, ViewSubject.viewSubject);
       }),
 ];
